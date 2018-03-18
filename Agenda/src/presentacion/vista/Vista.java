@@ -20,8 +20,9 @@ public class Vista
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnReporte;
+	private JButton btnEditar;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Teléfono"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Teléfono","Domicilio","Email","Fecha de cumpleaños","Tipo de contacto"};
 
 	public Vista() 
 	{
@@ -60,7 +61,7 @@ public class Vista
 		btnAgregar.setBounds(10, 228, 89, 23);
 		panel.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(109, 228, 89, 23);
 		panel.add(btnEditar);
 		
@@ -106,6 +107,11 @@ public class Vista
 	public JButton getBtnReporte() 
 	{
 		return btnReporte;
+	}
+	
+	public JButton getBtnEditar()
+	{
+		return btnEditar;
 	}
 	
 	public DefaultTableModel getModelPersonas() 

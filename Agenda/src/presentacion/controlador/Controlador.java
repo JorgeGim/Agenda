@@ -22,6 +22,7 @@ public class Controlador implements ActionListener
 			this.vista.getBtnAgregar().addActionListener(this);
 			this.vista.getBtnBorrar().addActionListener(this);
 			this.vista.getBtnReporte().addActionListener(this);
+			this.vista.getBtnEditar().addActionListener(this);
 			this.agenda = agenda;
 			this.personas_en_tabla = null;
 		}
@@ -59,7 +60,7 @@ public class Controlador implements ActionListener
 				{
 					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
 				}
-				
+				//actualiza la tabla
 				this.llenarTabla();
 				
 			}
@@ -74,6 +75,10 @@ public class Controlador implements ActionListener
 				this.agenda.agregarPersona(nuevaPersona);
 				this.llenarTabla();
 				this.ventanaPersona.dispose();
+			}
+			else if(e.getSource() == this.vista.getBtnEditar())
+			{
+				this.ventanaPersona = new VentanaPersona(this);
 			}
 		}
 
