@@ -126,6 +126,7 @@ public class VentanaPersona extends JFrame
 		txtLocalidad = new JComboBox();
 		txtLocalidad.setBounds(433, 131, 164, 20); // (133,y+41,164,20)
 		panel.add(txtLocalidad);
+		txtLocalidad.addItem("San miguel");
 
 		
 		txtEmail = new JTextField();
@@ -140,6 +141,10 @@ public class VentanaPersona extends JFrame
 		
 		txtTipoDeContacto = new JComboBox();
 		txtTipoDeContacto.setBounds(133, 254, 164, 20); // (133,y+41,164,20)
+		txtTipoDeContacto.addItem("Trabajo");
+		txtTipoDeContacto.addItem("Familia");
+		txtTipoDeContacto.addItem("Amigos");
+		txtTipoDeContacto.addItem("Otros");
 		panel.add(txtTipoDeContacto);
 		
 		btnAgregarPersona = new JButton("Agregar");
@@ -163,6 +168,38 @@ public class VentanaPersona extends JFrame
 	public JButton getBtnAgregarPersona() 
 	{
 		return btnAgregarPersona;
+	}
+
+	public JTextField getTxtCalle() {
+		return txtCalle;
+	}
+
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public JTextField getTxtFechaDeCumpleaños() {
+		return txtFechaDeCumpleaños;
+	}
+
+	public JComboBox getTxtTipoDeContacto() {
+		return txtTipoDeContacto;
+	}
+
+	public JTextField getTxtAltura() {
+		return txtAltura;
+	}
+
+	public JTextField getTxtPiso() {
+		return txtPiso;
+	}
+
+	public JTextField getTxtDepto() {
+		return txtDepto;
+	}
+
+	public JComboBox getTxtLocalidad() {
+		return txtLocalidad;
 	}
 	
 }
