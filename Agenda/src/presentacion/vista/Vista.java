@@ -22,7 +22,7 @@ public class Vista
 	private JButton btnReporte;
 	private JButton btnEditar;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Teléfono","Domicilio","Email","Fecha de cumpleaños","Tipo de contacto"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Teléfono","Calle","Altura","Piso","Depto","Localidad","Fecha de cumpleaños","Tipo de contacto"};
 
 	public Vista() 
 	{
@@ -35,16 +35,18 @@ public class Vista
 	{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
+		frame.setSize(1000, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 262);
+		panel.setBounds(0, 0, 1000, 262);
+		panel.setSize(1000, 400);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 414, 182);
+		spPersonas.setBounds(10, 11, 950, 200);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
