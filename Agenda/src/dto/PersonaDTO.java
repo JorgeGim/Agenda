@@ -31,8 +31,8 @@ public class PersonaDTO
 		this.piso=piso;
 		this.depto=depto;
 		this.localidad=localidad;
-		this.email=email;
-		this.fechaCumpleaños=fechaCumpleaños;
+		this.email=Email;
+		this.fechaCumpleaños=fechaDeCumpleaños;
 		this.tipoContacto=tipoDeContacto;
 	}
 	
