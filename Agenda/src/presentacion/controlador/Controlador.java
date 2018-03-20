@@ -75,7 +75,7 @@ public class Controlador implements ActionListener
 				for (int fila:filas_seleccionadas)
 				{
 					this.ventanaPersona = new VentanaPersona(this);
-					PersonaDTO persona = agenda.obtenerPersona(this.personas_en_tabla.get(fila));
+					PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
 					
 					this.ventanaPersona.setTxtNombre(persona.getNombre().toString());
 					this.ventanaPersona.setTxtTelefono(persona.getTelefono().toString());
@@ -89,7 +89,7 @@ public class Controlador implements ActionListener
 					this.ventanaPersona.setTxtTipoDeContacto(persona.getTipoContacto().toString());
 					
 					
-					
+					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
 					//ventanaPersona.setTxtNombre(txtNombre);
 					
 				}
