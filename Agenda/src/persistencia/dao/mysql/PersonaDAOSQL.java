@@ -132,12 +132,16 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setString(1, Integer.toString(persona.getIdPersona()));
 			
 			resultSet = statement.executeQuery();
-			return new PersonaDTO(resultSet.getInt("idPersona"), resultSet.getString("Nombre"), resultSet.getString("Telefono"),resultSet.getString("Calle"),resultSet.getString("Altura"),resultSet.getString("Piso"),resultSet.getString("Depto"),resultSet.getString("Localidad"),resultSet.getString("Email"),resultSet.getString("FechaDeCumpleaños"),resultSet.getString("TipoDeContacto"));
+			while(resultSet.next())
+			{
+				persona=new PersonaDTO(resultSet.getInt("idPersona"), resultSet.getString("Nombre"), resultSet.getString("Telefono"),resultSet.getString("Calle"),resultSet.getString("Altura"),resultSet.getString("Piso"),resultSet.getString("Depto"),resultSet.getString("Localidad"),resultSet.getString("Email"),resultSet.getString("FechaDeCumpleaños"),resultSet.getString("TipoDeContacto"));
+			}
+			
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return persona;
 	}
 }
