@@ -165,7 +165,7 @@ public class VentanaPersona extends JFrame
 	}
 
 	public void setTxtTelefono(String txtTelefono) {
-		this.txtCalle.setText(txtTelefono);
+		this.txtTelefono.setText(txtTelefono);
 	}
 
 	public void setTxtCalle(String txtCalle) {
