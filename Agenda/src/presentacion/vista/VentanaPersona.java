@@ -127,7 +127,9 @@ public class VentanaPersona extends JFrame
 		txtLocalidad = new JComboBox();
 		txtLocalidad.setBounds(433, 131, 164, 20); // (133,y+41,164,20)
 		panel.add(txtLocalidad);
-		txtLocalidad.addItem("San miguel");
+		txtLocalidad.addItem("Trujui");
+		txtLocalidad.addItem("Malvinas Argentinas");
+		txtLocalidad.addItem("San Miguel Arcangel");
 
 		
 		txtEmail = new JTextField();
@@ -181,7 +183,7 @@ public class VentanaPersona extends JFrame
 	}
 
 	public void setTxtTipoDeContacto(String txtTipoDeContacto) {
-		//this.txtTipoDeContacto.set
+		this.txtTipoDeContacto.setSelectedItem(txtTipoDeContacto);
 	}
 
 	public void setTxtAltura(String txtAltura) {
@@ -197,7 +199,7 @@ public class VentanaPersona extends JFrame
 	}
 
 	public void setTxtLocalidad(String txtLocalidad) {
-		//this.txtLocalidad = txtLocalidad;
+		this.txtLocalidad.setSelectedItem(txtLocalidad);
 	}
 
 	public JTextField getTxtNombre() 
