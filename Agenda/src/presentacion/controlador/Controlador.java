@@ -69,6 +69,34 @@ public class Controlador implements ActionListener
 				ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
 				reporte.mostrar();				
 			}
+			else if(e.getSource() == this.vista.getBtnEditar())
+			{
+				int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+				for (int fila:filas_seleccionadas)
+				{
+					this.ventanaPersona = new VentanaPersona(this);
+					PersonaDTO persona = agenda.obtenerPersona(this.personas_en_tabla.get(fila));
+					
+					this.ventanaPersona.setTxtNombre(persona.getNombre().toString());
+					this.ventanaPersona.setTxtTelefono(persona.getTelefono().toString());
+					this.ventanaPersona.setTxtCalle(persona.getCalle().toString());
+					this.ventanaPersona.setTxtAltura(persona.getAltura().toString());
+					this.ventanaPersona.setTxtPiso(persona.getPiso().toString());
+					this.ventanaPersona.setTxtDepto(persona.getDepto().toString());
+					this.ventanaPersona.setTxtLocalidad(persona.getLocalidad().toString());
+					this.ventanaPersona.setTxtEmail(persona.getEmail().toString());
+					this.ventanaPersona.setTxtFechaDeCumpleaños(persona.getFechaCumpleaños().toString());
+					this.ventanaPersona.setTxtTipoDeContacto(persona.getTipoContacto().toString());
+					
+					
+					
+					//ventanaPersona.setTxtNombre(txtNombre);
+					
+				}
+				//actualiza la tabla
+				this.llenarTabla();
+			
+			}
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
 				PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),ventanaPersona.getTxtLocalidad().getSelectedItem().toString(),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
@@ -76,10 +104,7 @@ public class Controlador implements ActionListener
 				this.llenarTabla();
 				this.ventanaPersona.dispose();
 			}
-			else if(e.getSource() == this.vista.getBtnEditar())
-			{
-				this.ventanaPersona = new VentanaPersona(this);
-			}
+			
 		}
 
 }

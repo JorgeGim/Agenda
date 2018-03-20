@@ -24,6 +24,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtFechaDeCumpleaños;
 	private JComboBox txtTipoDeContacto;
 	private JButton btnAgregarPersona;
+	private JButton btnEditarPersona;
 	private Controlador controlador;
 	private JTextField txtAltura;
 	private JTextField txtPiso;
@@ -155,6 +156,50 @@ public class VentanaPersona extends JFrame
 		this.setVisible(true);
 	}
 	
+	public void obtenerPersona(String nombre) {
+		
+	}
+	
+	public void setTxtNombre(String txtNombre) {
+		this.txtNombre.setText(txtNombre);
+	}
+
+	public void setTxtTelefono(String txtTelefono) {
+		this.txtCalle.setText(txtTelefono);
+	}
+
+	public void setTxtCalle(String txtCalle) {
+		this.txtCalle.setText(txtCalle);
+	}
+
+	public void setTxtEmail(String txtEmail) {
+		this.txtEmail.setText(txtEmail);
+	}
+
+	public void setTxtFechaDeCumpleaños(String txtFechaDeCumpleaños) {
+		this.txtFechaDeCumpleaños.setText(txtFechaDeCumpleaños);
+	}
+
+	public void setTxtTipoDeContacto(String txtTipoDeContacto) {
+		//this.txtTipoDeContacto.set
+	}
+
+	public void setTxtAltura(String txtAltura) {
+		this.txtAltura.setText(txtAltura);
+	}
+
+	public void setTxtPiso(String txtPiso) {
+		this.txtPiso.setText(txtPiso);
+	}
+
+	public void setTxtDepto(String txtDepto) {
+		this.txtDepto.setText(txtDepto);
+	}
+
+	public void setTxtLocalidad(String txtLocalidad) {
+		//this.txtLocalidad = txtLocalidad;
+	}
+
 	public JTextField getTxtNombre() 
 	{
 		return txtNombre;

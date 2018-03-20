@@ -30,4 +30,12 @@ public class Agenda
 		return this.persona.readAll();		
 	}
 	
+	public void editarPersona(PersonaDTO personaEditada, int id_PersonaAEditar) {
+		this.persona.editar(personaEditada, id_PersonaAEditar);
+	}
+	
+	public PersonaDTO obtenerPersona(PersonaDTO persona) {
+		return this.persona.obtenerPersona(persona);
+	}
+	
 }

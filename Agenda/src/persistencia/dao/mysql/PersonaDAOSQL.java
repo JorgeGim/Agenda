@@ -15,7 +15,9 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, localidad, email, fechaDeCumpleaños, tipoDeContacto)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
-		
+	private static final String editar = "UPDATE personas SET (idPersona, nombre, telefono, calle, altura, piso, depto, localidad, email, fechaDeCumpleaños, tipoDeContacto)\" + \"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE idPersona = ?" ;
+	private static final String obtenerPersona= "SELECT * FROM PERSONAS p WHERE p.idPersona = ?";
+	
 	public boolean insert(PersonaDTO persona)
 	{
 		PreparedStatement statement;
@@ -86,5 +88,56 @@ public class PersonaDAOSQL implements PersonaDAO
 			e.printStackTrace();
 		}
 		return personas;
+	}
+
+	@Override
+	public boolean editar(PersonaDTO persona, int id_persona) {
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(editar);
+			statement.setInt(1, persona.getIdPersona());
+			statement.setString(2, persona.getNombre());
+			statement.setString(3, persona.getTelefono());
+			statement.setString(4, persona.getCalle());
+			statement.setString(5, persona.getAltura());
+			statement.setString(6, persona.getPiso());
+			statement.setString(7, persona.getDepto());
+			statement.setString(8, persona.getLocalidad());
+			statement.setString(9, persona.getEmail());
+			statement.setString(10, persona.getFechaCumpleaños());
+			statement.setString(11, persona.getTipoContacto());
+			statement.setString(12, Integer.toString(id_persona));
+			
+			if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true
+				return true;
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public PersonaDTO obtenerPersona(PersonaDTO persona) {
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(obtenerPersona);
+			statement.setString(1, Integer.toString(persona.getIdPersona()));
+			
+			resultSet = statement.executeQuery();
+			return new PersonaDTO(resultSet.getInt("idPersona"), resultSet.getString("Nombre"), resultSet.getString("Telefono"),resultSet.getString("Calle"),resultSet.getString("Altura"),resultSet.getString("Piso"),resultSet.getString("Depto"),resultSet.getString("Localidad"),resultSet.getString("Email"),resultSet.getString("FechaDeCumpleaños"),resultSet.getString("TipoDeContacto"));
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
