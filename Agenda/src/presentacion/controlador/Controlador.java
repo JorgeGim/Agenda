@@ -88,7 +88,7 @@ public class Controlador implements ActionListener
 					this.ventanaPersona.setTxtFechaDeCumpleaños(persona.getFechaCumpleaños().toString());
 					this.ventanaPersona.setTxtTipoDeContacto(persona.getTipoContacto().toString());
 					
-					
+					//aca borra
 					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
 					//ventanaPersona.setTxtNombre(txtNombre);
 					

@@ -136,7 +136,7 @@ public class PersonaDAOSQL implements PersonaDAO
 			{
 				persona=new PersonaDTO(resultSet.getInt("idPersona"), resultSet.getString("Nombre"), resultSet.getString("Telefono"),resultSet.getString("Calle"),resultSet.getString("Altura"),resultSet.getString("Piso"),resultSet.getString("Depto"),resultSet.getString("Localidad"),resultSet.getString("Email"),resultSet.getString("FechaDeCumpleaños"),resultSet.getString("TipoDeContacto"));
 			}
-			
+		//aca cambio	
 		} 
 		catch (SQLException e) 
 		{
