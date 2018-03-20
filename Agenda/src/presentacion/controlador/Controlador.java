@@ -2,12 +2,14 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+
+import dto.PersonaDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
-import dto.PersonaDTO;
 
 public class Controlador implements ActionListener
 {
@@ -15,6 +17,7 @@ public class Controlador implements ActionListener
 		private List<PersonaDTO> personas_en_tabla;
 		private VentanaPersona ventanaPersona; 
 		private Agenda agenda;
+		private ArrayList<Integer> indices;
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -25,6 +28,7 @@ public class Controlador implements ActionListener
 			this.vista.getBtnEditar().addActionListener(this);
 			this.agenda = agenda;
 			this.personas_en_tabla = null;
+			this.indices = new ArrayList<Integer>();
 		}
 		
 		public void inicializar()
@@ -74,6 +78,7 @@ public class Controlador implements ActionListener
 				int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 				for (int fila:filas_seleccionadas)
 				{
+					indices.add(fila);
 					this.ventanaPersona = new VentanaPersona(this);
 					PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
 					
@@ -89,7 +94,7 @@ public class Controlador implements ActionListener
 					this.ventanaPersona.setTxtTipoDeContacto(persona.getTipoContacto().toString());
 					
 					//aca borra
-					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
+					//this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
 					//ventanaPersona.setTxtNombre(txtNombre);
 					
 				}
@@ -99,6 +104,11 @@ public class Controlador implements ActionListener
 			}
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
+				for (Integer fila:indices)
+				{
+					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
+				}
+				
 				PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),ventanaPersona.getTxtLocalidad().getSelectedItem().toString(),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
 				this.agenda.agregarPersona(nuevaPersona);
 				this.llenarTabla();

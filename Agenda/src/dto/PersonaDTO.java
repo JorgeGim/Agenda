@@ -37,7 +37,7 @@ public class PersonaDTO
 	}
 	
 	public String getCalle() {
-		return calle;
+		return this.calle;
 	}
 
 	public void setCalle(String calle) {
@@ -53,7 +53,7 @@ public class PersonaDTO
 	}
 
 	public String getPiso() {
-		return piso;
+		return this.piso;
 	}
 
 	public void setPiso(String piso) {
@@ -61,7 +61,7 @@ public class PersonaDTO
 	}
 
 	public String getDepto() {
-		return depto;
+		return this.depto;
 	}
 
 	public void setDepto(String depto) {
@@ -69,7 +69,7 @@ public class PersonaDTO
 	}
 
 	public String getLocalidad() {
-		return localidad;
+		return this.localidad;
 	}
 
 	public void setLocalidad(String localidad) {
@@ -77,7 +77,7 @@ public class PersonaDTO
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -85,7 +85,7 @@ public class PersonaDTO
 	}
 
 	public String getFechaCumpleaños() {
-		return fechaCumpleaños;
+		return this.fechaCumpleaños;
 	}
 
 	public void setFechaCumpleaños(String fechaCumpleaños) {
@@ -93,7 +93,7 @@ public class PersonaDTO
 	}
 
 	public String getTipoContacto() {
-		return tipoContacto;
+		return this.tipoContacto;
 	}
 
 	public void setTipoContacto(String tipoContacto) {
