@@ -78,6 +78,7 @@ public class Controlador implements ActionListener
 				int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 				for (int fila:filas_seleccionadas)
 				{
+					indices.clear();
 					indices.add(fila);
 					this.ventanaPersona = new VentanaPersona(this);
 					PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
