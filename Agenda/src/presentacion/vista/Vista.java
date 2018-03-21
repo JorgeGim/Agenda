@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
@@ -27,12 +28,22 @@ public class Vista
 	public Vista() 
 	{
 		super();
+		
+		try{
+			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+		}
+		catch(Exception e){
+			System.out.println("Error saving native LAF: " +e);
+		}
+		
+		
 		initialize();
 	}
 
 
 	private void initialize() 
 	{
+	
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setSize(1000, 400);
