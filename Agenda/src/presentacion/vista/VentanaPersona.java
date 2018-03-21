@@ -32,7 +32,8 @@ public class VentanaPersona extends JFrame
 	private JTextField txtPiso;
 	private JTextField txtDepto;
 	private JComboBox txtLocalidad;
-	
+	private Label notificadorCamposObligatorios;
+	private JPanel panel;
 
 	public VentanaPersona(Controlador controlador) 
 	{
@@ -48,7 +49,7 @@ public class VentanaPersona extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		//panel.setBounds(10, 11, 307, 123);
 		panel.setSize(1000, 400);
 		contentPane.add(panel);
@@ -168,6 +169,13 @@ public class VentanaPersona extends JFrame
 	
 	public void obtenerPersona(String nombre) {
 		
+	}
+	
+	public void notificarCamposRequeridos() {
+		notificadorCamposObligatorios = new Label("ERROR: Complete NOMBRE y CALLE");
+		notificadorCamposObligatorios.setBounds(310, 295, 230, 14);
+		notificadorCamposObligatorios.setForeground(Color.RED);
+		panel.add(notificadorCamposObligatorios);
 	}
 	
 	public void setTxtNombre(String txtNombre) {

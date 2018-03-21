@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JTextField;
+
 import dto.PersonaDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
@@ -112,10 +114,30 @@ public class Controlador implements ActionListener
 				}
 				indices.clear();
 				
-				PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),ventanaPersona.getTxtLocalidad().getSelectedItem().toString(),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
-				this.agenda.agregarPersona(nuevaPersona);
-				this.llenarTabla();
-				this.ventanaPersona.dispose();
+				boolean bandera = true;
+				
+				JTextField nombre = this.ventanaPersona.getTxtNombre();
+				JTextField calle = this.ventanaPersona.getTxtCalle();
+				
+				if(nombre.getText().isEmpty()) {
+					System.out.println("Nombre requerido");
+					this.ventanaPersona.notificarCamposRequeridos();
+					bandera = false;
+				}
+				
+				if(calle.getText().isEmpty()) {
+					System.out.println("Calle requerida");
+					this.ventanaPersona.notificarCamposRequeridos();
+					bandera = false;
+				}
+				
+				if(bandera) {
+					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),ventanaPersona.getTxtLocalidad().getSelectedItem().toString(),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
+					this.agenda.agregarPersona(nuevaPersona);
+					this.llenarTabla();
+					this.ventanaPersona.dispose();
+				}
+				
 			}
 			
 		}
