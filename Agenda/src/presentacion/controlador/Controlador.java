@@ -120,13 +120,11 @@ public class Controlador implements ActionListener
 				JTextField calle = this.ventanaPersona.getTxtCalle();
 				
 				if(nombre.getText().isEmpty()) {
-					System.out.println("Nombre requerido");
 					this.ventanaPersona.notificarCamposRequeridos();
 					bandera = false;
 				}
 				
 				if(calle.getText().isEmpty()) {
-					System.out.println("Calle requerida");
 					this.ventanaPersona.notificarCamposRequeridos();
 					bandera = false;
 				}
@@ -141,5 +139,4 @@ public class Controlador implements ActionListener
 			}
 			
 		}
-
 }
