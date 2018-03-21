@@ -1,7 +1,9 @@
 package presentacion.vista;
 
 
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Label;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -30,6 +32,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtPiso;
 	private JTextField txtDepto;
 	private JComboBox txtLocalidad;
+	
 
 	public VentanaPersona(Controlador controlador) 
 	{
@@ -87,6 +90,11 @@ public class VentanaPersona extends JFrame
 		JLabel lblFechaCumpleaños = new JLabel("Fecha cumpleaños");
 		lblFechaCumpleaños.setBounds(10, 216, 113, 14);
 		panel.add(lblFechaCumpleaños);
+		
+		Label lblFormatoFechaCumpleaños = new Label("dd/mm/yyyy");
+		lblFormatoFechaCumpleaños.setBounds(310, 215, 113, 14);
+		lblFormatoFechaCumpleaños.setForeground(Color.red);
+		panel.add(lblFormatoFechaCumpleaños);
 		
 		JLabel lblTipoDeContacto = new JLabel("Tipo de contacto");
 		lblTipoDeContacto.setBounds(10, 257, 113, 14);
