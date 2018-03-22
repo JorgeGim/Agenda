@@ -24,6 +24,7 @@ public class Vista
 	private JButton btnEditar;
 	private DefaultTableModel modelPersonas;
 	private  String[] nombreColumnas = {"Nombre y apellido","Teléfono","Calle","Altura","Piso","Depto","Localidad","Email","Fecha de cumpleaños","Tipo de contacto"};
+	private JButton btnLocalidades;
 
 	public Vista() 
 	{
@@ -87,6 +88,11 @@ public class Vista
 		btnReporte = new JButton("Reporte");
 		btnReporte.setBounds(307, 228, 89, 23);
 		panel.add(btnReporte);
+		
+		btnLocalidades = new JButton("Localidad");
+		btnLocalidades.setBounds(406, 228, 89, 23);
+		panel.add(btnLocalidades);
+		
 	}
 	
 	public void show()
@@ -129,6 +135,11 @@ public class Vista
 		return btnEditar;
 	}
 	
+	public JButton getBtnLocalidades() {
+		return btnLocalidades;
+	}
+
+
 	public DefaultTableModel getModelPersonas() 
 	{
 		return modelPersonas;

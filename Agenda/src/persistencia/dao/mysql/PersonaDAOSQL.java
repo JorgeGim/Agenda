@@ -12,7 +12,7 @@ import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, localidad, email, fechaDeCumpleaños, tipoDeContacto)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, idLocalidad, email, fechaDeCumpleaños, idTipo)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 	private static final String editar = "UPDATE personas SET (idPersona, nombre, telefono, calle, altura, piso, depto, localidad, email, fechaDeCumpleaños, tipoDeContacto)\" + \"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE idPersona = ?" ;

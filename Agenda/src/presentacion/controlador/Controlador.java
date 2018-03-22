@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import dto.PersonaDTO;
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
+import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 
@@ -20,6 +21,7 @@ public class Controlador implements ActionListener
 		private VentanaPersona ventanaPersona; 
 		private Agenda agenda;
 		private ArrayList<Integer> indices;
+		private VentanaLocalidad ventanaLocalidad;
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -28,6 +30,7 @@ public class Controlador implements ActionListener
 			this.vista.getBtnBorrar().addActionListener(this);
 			this.vista.getBtnReporte().addActionListener(this);
 			this.vista.getBtnEditar().addActionListener(this);
+			this.vista.getBtnLocalidades().addActionListener(this);
 			this.agenda = agenda;
 			this.personas_en_tabla = null;
 			this.indices = new ArrayList<Integer>();
@@ -104,6 +107,11 @@ public class Controlador implements ActionListener
 				//actualiza la tabla
 				this.llenarTabla();
 			
+			}
+			else if(e.getSource() == this.vista.getBtnLocalidades()) {
+				System.out.println("algo");
+				this.ventanaLocalidad = new VentanaLocalidad(this);
+				ventanaLocalidad.setVisible(true);
 			}
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
