@@ -1,0 +1,106 @@
+package persistencia.dao.mysql;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import dto.LocalidadDTO;
+import dto.PersonaDTO;
+import persistencia.conexion.Conexion;
+import persistencia.dao.interfaz.LocalidadDAO;
+
+
+public class LocalidadDAOSQL implements LocalidadDAO {
+	private static final String insert = "INSERT INTO localidades(idLocalidad,NombreLocalidad)" + "VALUES(?, ?)";
+	private static final String delete = "DELETE FROM localidades WHERE idLocalidad = ?";
+	private static final String readall = "SELECT * FROM localidades";
+	private static final String editar = "UPDATE localidades SET (NombreLocalidad)\" + \"VALUES( ?) WHERE idLocalidad = ?" ;
+	private static final String obtenerPersona= "SELECT * FROM localidad l WHERE l.idLocalidad = ?";
+	
+
+	@Override
+	public boolean insert(LocalidadDTO localidad) {
+			PreparedStatement statement;
+			Conexion conexion = Conexion.getConexion();
+			try 
+			{
+				statement = conexion.getSQLConexion().prepareStatement(insert);
+				statement.setInt(1, localidad.getIdLocalidad());
+				statement.setString(2, localidad.getNombre());
+				
+				
+				if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true
+					return true;
+			} 
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+			return false;
+		
+	}
+
+	@Override
+	public boolean delete(LocalidadDTO localidadAEliminar) {
+		PreparedStatement statement;
+		int chequeoUpdate = 0;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(delete);
+			statement.setString(1, Integer.toString(localidadAEliminar.getIdLocalidad()));
+			chequeoUpdate = statement.executeUpdate();
+			if(chequeoUpdate > 0) //Si se ejecutÃ³ devuelvo true
+				return true;
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean editar(LocalidadDTO localidad) {
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(editar);
+			statement.setString(1, localidad.getNombre());
+			statement.setInt(2, obtenerID(localidad.getNombre()));
+
+			
+			if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true
+				return true;
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private int obtenerID(String nombre) {
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement("SELECT idLocalidad FROM localidad l WHERE l.NombreLocalidad = ?");
+			statement.setString(1, nombre);
+			
+			resultSet = statement.executeQuery();
+			
+			if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true
+				return resultSet.getInt("idLocalidad");
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return 0;
+		
+	}
+
+}
