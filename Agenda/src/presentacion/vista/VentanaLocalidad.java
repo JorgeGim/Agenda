@@ -2,18 +2,25 @@ package presentacion.vista;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import persistencia.conexion.Conexion;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Label;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -25,28 +32,138 @@ public class VentanaLocalidad extends JFrame{
 	private Controlador controlador;
 	private JPanel contentPane;
 	private JPanel panel;
+	private JTable tablaLocalidades;
+	private  String[] nombreColumna = {"Nombre localidades"};
+	private DefaultTableModel modelLocalidades;
+	private JFrame frame;
+	private JButton btnAgregar;
+	private JButton btnEditar;
+	private JButton btnBorrar;
+	private JButton btnAceptar;
+	private JButton btnAceptarEdicion;
+	private JTextField txtAgreg;
 
 	public VentanaLocalidad(Controlador controlador) {
 		
 		super();
 		this.controlador = controlador;
+		initialize();
+	}
+	
+	public JTable getTablaPersonas() {
+		return tablaLocalidades;
+	}
+
+	public String[] getNombreColumna() {
+		return nombreColumna;
+	}
+
+	public DefaultTableModel getModelPersonas() {
+		return modelLocalidades;
+	}
+
+	private void initialize(){
 		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(200, 200, 343, 183);
-		setBounds(100, 100, 450, 300);
-		setSize(1000,400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setSize(1000, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
 		panel.setBounds(10, 11, 307, 123);
 		panel.setSize(1000, 400);
-		contentPane.add(panel);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		JScrollPane spLocalidades = new JScrollPane();
+		spLocalidades.setBounds(10, 11, 950, 200);
+		panel.add(spLocalidades);
 		
+		
+		modelLocalidades = new DefaultTableModel(null,nombreColumna);
+		tablaLocalidades = new JTable(modelLocalidades);
+		
+		tablaLocalidades.getColumnModel().getColumn(0).setPreferredWidth(103);
+		tablaLocalidades.getColumnModel().getColumn(0).setResizable(false);
+
+		spLocalidades.setViewportView(tablaLocalidades);
+		
+		crearComponentes();
+	}
+
+	private void crearComponentes() {
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBounds(10, 228, 89, 23);
+		panel.add(btnAgregar);
+		
+		btnEditar = new JButton("Editar");
+		btnEditar.setBounds(109, 228, 89, 23);
+		panel.add(btnEditar);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(208, 228, 89, 23);
+		panel.add(btnBorrar);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(10,328,89,23);
+		panel.add(btnAceptar);
+		btnAceptar.setVisible(false);
+		
+		btnAceptarEdicion = new JButton("Editar");
+		btnAceptarEdicion.setBounds(10,328,89,23);
+		panel.add(btnAceptarEdicion);
+		btnAceptarEdicion.setVisible(false);
+		
+		txtAgreg = new JTextField();
+		txtAgreg.setBounds(109,328 , 89, 23);
+		panel.add(txtAgreg);
+		txtAgreg.setVisible(false);
 		
 	}
+	
+	public JTextField getTxtAgreg() {
+		return txtAgreg;
+	}
+
+	public void setTxtAgreg(JTextField txtAgreg) {
+		this.txtAgreg = txtAgreg;
+	}
+
+	public JButton getBtnAceptar() {
+		return btnAceptar;
+	}
+
+	public JButton getBtnAceptarEdicion() {
+		return btnAceptarEdicion;
+	}
+
+	public void visibleAceptar() {
+		btnAceptar.setVisible(true);
+		txtAgreg.setVisible(true);
+		btnAceptarEdicion.setVisible(false);
+	}
+	public void visibleAceptarEdicion() {
+		btnAceptarEdicion.setVisible(true);
+		txtAgreg.setVisible(true);
+		btnAceptar.setVisible(false);
+	}
+	public JButton getBtnAgregar() {
+		return btnAgregar;
+	}
+
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+	public JButton getBtnBorrar() {
+		return btnBorrar;
+	}
+
+	public void show()
+	{
+		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.frame.setVisible(true);
+	}
+	
 }

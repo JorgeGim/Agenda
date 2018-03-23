@@ -3,6 +3,8 @@ package persistencia.dao.mysql;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
@@ -18,7 +20,6 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	private static final String obtenerPersona= "SELECT * FROM localidad l WHERE l.idLocalidad = ?";
 	
 
-	@Override
 	public boolean insert(LocalidadDTO localidad) {
 			PreparedStatement statement;
 			Conexion conexion = Conexion.getConexion();
@@ -40,7 +41,6 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		
 	}
 
-	@Override
 	public boolean delete(LocalidadDTO localidadAEliminar) {
 		PreparedStatement statement;
 		int chequeoUpdate = 0;
@@ -60,7 +60,6 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		return false;
 	}
 
-	@Override
 	public boolean editar(LocalidadDTO localidad) {
 		PreparedStatement statement;
 		Conexion conexion = Conexion.getConexion();
@@ -101,6 +100,33 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		}
 		return 0;
 		
+	}
+
+	public List<LocalidadDTO> readAll() {
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				localidades.add(new LocalidadDTO(resultSet.getInt("idLocalidad"), resultSet.getString("NombreLocalidad")));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return localidades;
+	}
+
+	public PersonaDTO obtenerPersona(LocalidadDTO localidad) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

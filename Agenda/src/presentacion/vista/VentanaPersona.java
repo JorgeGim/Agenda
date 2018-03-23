@@ -198,8 +198,8 @@ public class VentanaPersona extends JFrame
 		this.txtFechaDeCumpleaños.setText(txtFechaDeCumpleaños);
 	}
 
-	public void setTxtTipoDeContacto(String txtTipoDeContacto) {
-		this.txtTipoDeContacto.setSelectedItem(txtTipoDeContacto);
+	public void setTxtTipoDeContacto(int i) {
+		this.txtTipoDeContacto.setSelectedItem(i);
 	}
 
 	public void setTxtAltura(String txtAltura) {
@@ -214,8 +214,8 @@ public class VentanaPersona extends JFrame
 		this.txtDepto.setText(txtDepto);
 	}
 
-	public void setTxtLocalidad(String txtLocalidad) {
-		this.txtLocalidad.setSelectedItem(txtLocalidad);
+	public void setTxtLocalidad(int i) {
+		this.txtLocalidad.setSelectedItem(i);
 	}
 
 	public JTextField getTxtNombre() 
