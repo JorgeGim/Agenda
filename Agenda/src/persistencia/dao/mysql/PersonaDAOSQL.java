@@ -15,7 +15,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, idLocalidad, email, fechaDeCumpleaños, TipoContacto)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM agenda.personas";
-	private static final String editar = "UPDATE personas SET (idPersona, nombre, telefono, calle, altura, piso, depto, localidad, email, fechaDeCumpleaños, TipoContacto)\" + \"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) WHERE idPersona = ?" ;
+	private static final String editar = "UPDATE personas SET nombre = ? , telefono = ? , calle = ? , altura = ? , piso = ? , depto = ? , idLocalidad = ? , email = ? , fechaDeCumpleaños = ? , TipoContacto = ?  WHERE idPersona = ? " ;
 	private static final String obtenerPersona= "SELECT * FROM PERSONAS p WHERE p.idPersona = ?";
 	
 	public boolean insert(PersonaDTO persona)
@@ -35,7 +35,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(8, persona.getLocalidad());
 			statement.setString(9, persona.getEmail());
 			statement.setString(10, persona.getFechaCumpleaños());
-			statement.setString(11, persona.getTipoContacto());
+			String id = persona.getTipoContacto();
+			System.out.println(id);
+			statement.setString(11,id);
 			
 			if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true
 				return true;
@@ -97,18 +99,17 @@ public class PersonaDAOSQL implements PersonaDAO
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(editar);
-			statement.setInt(1, persona.getIdPersona());
-			statement.setString(2, persona.getNombre());
-			statement.setString(3, persona.getTelefono());
-			statement.setString(4, persona.getCalle());
-			statement.setString(5, persona.getAltura());
-			statement.setString(6, persona.getPiso());
-			statement.setString(7, persona.getDepto());
-			statement.setInt(8, persona.getLocalidad());
-			statement.setString(9, persona.getEmail());
-			statement.setString(10, persona.getFechaCumpleaños());
-			statement.setString(11, persona.getTipoContacto());
-			statement.setString(12, Integer.toString(id_persona));
+			statement.setString(1, persona.getNombre());
+			statement.setString(2, persona.getTelefono());
+			statement.setString(3, persona.getCalle());
+			statement.setString(4, persona.getAltura());
+			statement.setString(5, persona.getPiso());
+			statement.setString(6, persona.getDepto());
+			statement.setInt(7, persona.getLocalidad());
+			statement.setString(8, persona.getEmail());
+			statement.setString(9, persona.getFechaCumpleaños());
+			statement.setString(10, persona.getTipoContacto());
+			statement.setInt(11, id_persona);
 			
 			if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true
 				return true;

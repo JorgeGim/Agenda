@@ -16,7 +16,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	private static final String insert = "INSERT INTO localidades(idLocalidad,NombreLocalidad)" + "VALUES(?, ?)";
 	private static final String delete = "DELETE FROM localidades WHERE idLocalidad = ?";
 	private static final String readall = "SELECT * FROM localidades";
-	private static final String editar = "UPDATE localidades SET (NombreLocalidad)\" + \"VALUES( ?) WHERE idLocalidad = ?" ;
+	private static final String editar = "UPDATE localidades SET NombreLocalidad = ? WHERE idLocalidad = ?" ;
 	private static final String obtenerLocalidad = "SELECT * FROM localidades l WHERE l.idLocalidad = ?";
 	private static final String obtenerId = "SELECT idLocalidad FROM localidades l WHERE l.NombreLocalidad = ?";
 	
@@ -60,14 +60,14 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		return false;
 	}
 
-	public boolean editar(LocalidadDTO localidad) {
+	public boolean editar(LocalidadDTO localidad, int idEditar) {
 		PreparedStatement statement;
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(editar);
 			statement.setString(1, localidad.getNombre());
-			statement.setInt(2, obtenerID(localidad.getNombre()));
+			statement.setInt(2, idEditar);
 
 			
 			if(statement.executeUpdate() > 0) //Si se ejecutó devuelvo true

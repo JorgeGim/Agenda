@@ -26,6 +26,7 @@ public class Controlador implements ActionListener
 		private Localidades localidades;
 		private ArrayList<Integer> indices;
 		private VentanaLocalidad ventanaLocalidad;
+		private boolean agregando;
 		
 		public Controlador(Vista vista, Agenda agenda,Localidades localidad)
 		{
@@ -83,6 +84,7 @@ public class Controlador implements ActionListener
 			if(e.getSource() == this.vista.getBtnAgregar())
 			{
 				this.ventanaPersona = new VentanaPersona(this,this.localidades);
+				this.agregando=true;
 			}
 			else if(e.getSource() == this.vista.getBtnBorrar())
 			{
@@ -108,8 +110,10 @@ public class Controlador implements ActionListener
 					indices.clear();
 					indices.add(fila);
 					this.ventanaPersona = new VentanaPersona(this,this.localidades);
+					this.agregando=false;
 					PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
 					
+					this.ventanaPersona.setIdPersonaAEditar(persona.getIdPersona());
 					this.ventanaPersona.setTxtNombre(persona.getNombre().toString());
 					this.ventanaPersona.setTxtTelefono(persona.getTelefono().toString());
 					this.ventanaPersona.setTxtCalle(persona.getCalle().toString());
@@ -161,6 +165,8 @@ public class Controlador implements ActionListener
 				for (int fila:filas)
 				{
 					LocalidadDTO local = this.localidades.obtenerLocalidad(this.localidades_en_tabla.get(fila).getIdLocalidad());
+					
+					this.ventanaLocalidad.setIdEditar(local.getIdLocalidad());
 					this.ventanaLocalidad.setTxtAgreg(local.getNombre());
 					System.out.println(local.getNombre());
 				}
@@ -169,7 +175,11 @@ public class Controlador implements ActionListener
 				ventanaLocalidad.visibleAceptarEdicion();
 			}
 			else if(e.getSource() == this.ventanaLocalidad.getBtnAceptarEdicion()) {
-				//update localidad
+				
+				LocalidadDTO localidadEditar=new LocalidadDTO(0,this.ventanaLocalidad.getTxtAgreg().getText());
+				this.localidades.editar(localidadEditar, this.ventanaLocalidad.getIdEditar());
+				this.llenarTablaLocalidad();
+				//this.ventanaLocalidad.dispose();
 			}
 			else if(e.getSource() == this.ventanaLocalidad.getBtnAceptar()) {
 				String nombreLocalidadAgregar = this.ventanaLocalidad.getTxtAgreg().getText();
@@ -183,28 +193,15 @@ public class Controlador implements ActionListener
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
 				
-				for (Integer fila:indices)
+				/*for (Integer fila:indices)
 				{
 					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
 				}
 				indices.clear();
+				*/
+				boolean bandera = verificarNombreCalle();
 				
-				boolean bandera = true;
-				
-				JTextField nombre = this.ventanaPersona.getTxtNombre();
-				JTextField calle = this.ventanaPersona.getTxtCalle();
-				
-				if(nombre.getText().isEmpty()) {
-					this.ventanaPersona.notificarCamposRequeridos();
-					bandera = false;
-				}
-				
-				if(calle.getText().isEmpty()) {
-					this.ventanaPersona.notificarCamposRequeridos();
-					bandera = false;
-				}
-				
-				if(bandera) {
+				if(bandera && agregando) {
 					//ventanaPersona.getTxtLocalidad().getSelectedItem().toString()
 					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
 					this.agenda.agregarPersona(nuevaPersona);
@@ -213,7 +210,36 @@ public class Controlador implements ActionListener
 				}
 				
 			}
+			else if(e.getSource() == this.ventanaPersona.getBtnEditarPersona()) {
+				boolean bandera= verificarNombreCalle();
+				
+				if(bandera && !agregando) {
+					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
+//					System.out.println(this.ventanaPersona.getIdEditar());
+					this.agenda.editarPersona(nuevaPersona, this.ventanaPersona.getIdEditar());
+					this.llenarTabla();
+					this.ventanaPersona.dispose();
+				}
+			}
 			
+		}
+
+		private boolean verificarNombreCalle() {
+			boolean bandera = true;
+			
+			JTextField nombre = this.ventanaPersona.getTxtNombre();
+			JTextField calle = this.ventanaPersona.getTxtCalle();
+			
+			if(nombre.getText().isEmpty()) {
+				this.ventanaPersona.notificarCamposRequeridos();
+				bandera = false;
+			}
+			
+			if(calle.getText().isEmpty()) {
+				this.ventanaPersona.notificarCamposRequeridos();
+				bandera = false;
+			}
+			return bandera;
 		}
 
 		private int[] obtenerFila() {

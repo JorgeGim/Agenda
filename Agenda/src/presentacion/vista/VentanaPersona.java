@@ -38,6 +38,7 @@ public class VentanaPersona extends JFrame
 	private Label notificadorCamposObligatorios;
 	private JPanel panel;
 	private Localidades localidades;
+	private int idEditar;
 
 	public VentanaPersona(Controlador controlador, Localidades localidades) 
 	{
@@ -167,12 +168,21 @@ public class VentanaPersona extends JFrame
 		
 		btnAgregarPersona = new JButton("Agregar");
 		btnAgregarPersona.addActionListener(this.controlador);
-		btnAgregarPersona.setBounds(208, 291, 89, 23);
+		btnAgregarPersona.setBounds(10, 291, 89, 23);
 		panel.add(btnAgregarPersona);
+		
+		btnEditarPersona = new JButton("Editar");
+		btnEditarPersona.addActionListener(this.controlador);
+		btnEditarPersona.setBounds(208, 291, 89, 23);
+		panel.add(btnEditarPersona);
 		
 		this.setVisible(true);
 	}
 	
+	public JButton getBtnEditarPersona() {
+		return btnEditarPersona;
+	}
+
 	public void obtenerPersona(String nombre) {
 		
 	}
@@ -269,6 +279,14 @@ public class VentanaPersona extends JFrame
 
 	public JComboBox getTxtLocalidad() {
 		return comboBoxLocalidad;
+	}
+
+	public void setIdPersonaAEditar(int idPersona) {
+		this.idEditar=idPersona;
+	}
+	
+	public int getIdEditar() {
+		return idEditar;
 	}
 	
 }

@@ -11,7 +11,7 @@ public interface LocalidadDAO {
 	
 	public boolean delete(LocalidadDTO localidadAEliminar);
 	
-	public boolean editar(LocalidadDTO localidad);
+	public boolean editar(LocalidadDTO localidad, int idLocalidadAEditar);
 
 	public List<LocalidadDTO> readAll();
 

@@ -30,8 +30,8 @@ public class Localidades {
 		return this.localidad.readAll();		
 	}
 	
-	public void editar(LocalidadDTO localidadEditada) {
-		this.localidad.editar(localidadEditada);
+	public void editar(LocalidadDTO localidadEditada , int idLocalidadAEditar) {
+		this.localidad.editar(localidadEditada,idLocalidadAEditar);
 	}
 	
 	public LocalidadDTO obtenerLocalidad(int localidad) {

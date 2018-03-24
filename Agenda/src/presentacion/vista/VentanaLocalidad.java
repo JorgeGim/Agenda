@@ -42,6 +42,7 @@ public class VentanaLocalidad extends JFrame{
 	private JButton btnAceptar;
 	private JButton btnAceptarEdicion;
 	private JTextField txtAgreg;
+	private int idEditar;
 
 	public VentanaLocalidad(Controlador controlador) {
 		
@@ -164,6 +165,14 @@ public class VentanaLocalidad extends JFrame{
 	{
 		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.frame.setVisible(true);
+	}
+	
+	public void setIdEditar(int idEditar) {
+		this.idEditar=idEditar;
+	}
+	
+	public int getIdEditar() {
+		return idEditar;
 	}
 	
 }
