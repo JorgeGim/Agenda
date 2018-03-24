@@ -86,7 +86,7 @@ public class Controlador implements ActionListener
 			}
 			else if(e.getSource() == this.vista.getBtnBorrar())
 			{
-				int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+				int[] filas_seleccionadas = obtenerFila();
 				for (int fila:filas_seleccionadas)
 				{
 					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
@@ -102,7 +102,7 @@ public class Controlador implements ActionListener
 			}
 			else if(e.getSource() == this.vista.getBtnEditar())
 			{
-				int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+				int[] filas_seleccionadas = obtenerFila();
 				for (int fila:filas_seleccionadas)
 				{
 					indices.clear();
@@ -147,17 +147,38 @@ public class Controlador implements ActionListener
 				ventanaLocalidad.visibleAceptar();
 			}
 			else if(e.getSource() == this.ventanaLocalidad.getBtnBorrar()) {
-				System.out.println("borrando");
+				int[] filas = this.ventanaLocalidad.getTablaLocalidades().getSelectedRows();
+				for (int fila:filas)
+				{
+					this.localidades.borrarLocalidad(this.localidades_en_tabla.get(fila));
+				}
+				//actualiza la tabla
+				this.llenarTablaLocalidad();
 			}
 			else if(e.getSource() == this.ventanaLocalidad.getBtnEditar()) {
 				System.out.println("editando");
+				int[] filas = this.ventanaLocalidad.getTablaLocalidades().getSelectedRows();
+				for (int fila:filas)
+				{
+					LocalidadDTO local = this.localidades.obtenerLocalidad(this.localidades_en_tabla.get(fila).getIdLocalidad());
+					this.ventanaLocalidad.setTxtAgreg(local.getNombre());
+					System.out.println(local.getNombre());
+				}
+				//actualiza la tabla
+				this.llenarTablaLocalidad();
 				ventanaLocalidad.visibleAceptarEdicion();
 			}
+			else if(e.getSource() == this.ventanaLocalidad.getBtnAceptarEdicion()) {
+				//update localidad
+			}
 			else if(e.getSource() == this.ventanaLocalidad.getBtnAceptar()) {
-
-				LocalidadDTO nuevaLocalidad = new LocalidadDTO(0,this.ventanaLocalidad.getTxtAgreg().getText());
+				String nombreLocalidadAgregar = this.ventanaLocalidad.getTxtAgreg().getText();
+				if(localidades.obtenerId(nombreLocalidadAgregar) == 0 && !nombreLocalidadAgregar.equals("")) {
+				LocalidadDTO nuevaLocalidad = new LocalidadDTO(0,nombreLocalidadAgregar);
 				this.localidades.agregarLocalidad(nuevaLocalidad);
+				this.ventanaLocalidad.setTxtAgreg("");
 				this.llenarTablaLocalidad();
+				}
 			}
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
@@ -193,5 +214,10 @@ public class Controlador implements ActionListener
 				
 			}
 			
+		}
+
+		private int[] obtenerFila() {
+			int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+			return filas_seleccionadas;
 		}
 }

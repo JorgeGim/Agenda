@@ -50,16 +50,16 @@ public class VentanaLocalidad extends JFrame{
 		initialize();
 	}
 	
-	public JTable getTablaPersonas() {
-		return tablaLocalidades;
-	}
-
 	public String[] getNombreColumna() {
 		return nombreColumna;
 	}
 
 	public DefaultTableModel getModelPersonas() {
 		return modelLocalidades;
+	}
+
+	public JTable getTablaLocalidades() {
+		return tablaLocalidades;
 	}
 
 	private void initialize(){
@@ -125,9 +125,9 @@ public class VentanaLocalidad extends JFrame{
 	public JTextField getTxtAgreg() {
 		return txtAgreg;
 	}
-
-	public void setTxtAgreg(JTextField txtAgreg) {
-		this.txtAgreg = txtAgreg;
+	
+	public void setTxtAgreg(String txtAgreg) {
+		this.txtAgreg.setText(txtAgreg);
 	}
 
 	public JButton getBtnAceptar() {
