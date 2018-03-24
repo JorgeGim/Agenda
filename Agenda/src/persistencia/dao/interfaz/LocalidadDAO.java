@@ -15,6 +15,9 @@ public interface LocalidadDAO {
 
 	public List<LocalidadDTO> readAll();
 
-	public PersonaDTO obtenerPersona(LocalidadDTO localidad);
+	public LocalidadDTO obtenerLocalidad(int localidad);
+	
+	public int obtenerId(String nombreLocalidad);
+
 	
 }

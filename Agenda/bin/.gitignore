@@ -1,5 +1,4 @@
-/persistencia/
-/dto/
 /presentacion/
-/main/
+/dto/
+/persistencia/
 /modelo/

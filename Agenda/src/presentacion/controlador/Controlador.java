@@ -55,12 +55,13 @@ public class Controlador implements ActionListener
 			this.vista.getModelPersonas().setColumnCount(0);
 			this.vista.getModelPersonas().setColumnIdentifiers(this.vista.getNombreColumnas());
 			
-			/*this.personas_en_tabla = agenda.obtenerPersonas();
+			this.personas_en_tabla = agenda.obtenerPersonas();
 			for (int i = 0; i < this.personas_en_tabla.size(); i ++)
 			{
-				Object[] fila = {this.personas_en_tabla.get(i).getNombre(), this.personas_en_tabla.get(i).getTelefono(),this.personas_en_tabla.get(i).getCalle(),this.personas_en_tabla.get(i).getAltura(),this.personas_en_tabla.get(i).getPiso(),this.personas_en_tabla.get(i).getDepto(),this.personas_en_tabla.get(i).getLocalidad(),this.personas_en_tabla.get(i).getEmail(),this.personas_en_tabla.get(i).getFechaCumpleaños(),this.personas_en_tabla.get(i).getTipoContacto()};
+				String local = this.localidades.obtenerLocalidad(this.personas_en_tabla.get(i).getLocalidad()).getNombre();
+				Object[] fila = {this.personas_en_tabla.get(i).getNombre(), this.personas_en_tabla.get(i).getTelefono(),this.personas_en_tabla.get(i).getCalle(),this.personas_en_tabla.get(i).getAltura(),this.personas_en_tabla.get(i).getPiso(),this.personas_en_tabla.get(i).getDepto(),local,this.personas_en_tabla.get(i).getEmail(),this.personas_en_tabla.get(i).getFechaCumpleaños(),this.personas_en_tabla.get(i).getTipoContacto()};
 				this.vista.getModelPersonas().addRow(fila);
-			}			*/
+			}			
 		}
 		
 		private void llenarTablaLocalidad() {
@@ -72,7 +73,7 @@ public class Controlador implements ActionListener
 			for (int i = 0; i < this.localidades_en_tabla.size(); i ++)
 			{
 				Object[] filaLocalidades = {this.localidades_en_tabla.get(i).getNombre()};
-				this.vista.getModelPersonas().addRow(filaLocalidades);
+				this.ventanaLocalidad.getModelPersonas().addRow(filaLocalidades);
 			}
 			
 		}
@@ -81,7 +82,7 @@ public class Controlador implements ActionListener
 		{
 			if(e.getSource() == this.vista.getBtnAgregar())
 			{
-				this.ventanaPersona = new VentanaPersona(this);
+				this.ventanaPersona = new VentanaPersona(this,this.localidades);
 			}
 			else if(e.getSource() == this.vista.getBtnBorrar())
 			{
@@ -106,7 +107,7 @@ public class Controlador implements ActionListener
 				{
 					indices.clear();
 					indices.add(fila);
-					this.ventanaPersona = new VentanaPersona(this);
+					this.ventanaPersona = new VentanaPersona(this,this.localidades);
 					PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
 					
 					this.ventanaPersona.setTxtNombre(persona.getNombre().toString());
@@ -115,7 +116,7 @@ public class Controlador implements ActionListener
 					this.ventanaPersona.setTxtAltura(persona.getAltura().toString());
 					this.ventanaPersona.setTxtPiso(persona.getPiso().toString());
 					this.ventanaPersona.setTxtDepto(persona.getDepto().toString());
-					this.ventanaPersona.setTxtLocalidad(persona.getLocalidad());
+					this.ventanaPersona.setTxtLocalidad(this.localidades.obtenerLocalidad(persona.getLocalidad()).getNombre());
 					this.ventanaPersona.setTxtEmail(persona.getEmail().toString());
 					this.ventanaPersona.setTxtFechaDeCumpleaños(persona.getFechaCumpleaños().toString());
 					this.ventanaPersona.setTxtTipoDeContacto(persona.getTipoContacto());
@@ -184,7 +185,7 @@ public class Controlador implements ActionListener
 				
 				if(bandera) {
 					//ventanaPersona.getTxtLocalidad().getSelectedItem().toString()
-					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),0,ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),0);
+					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString());
 					this.agenda.agregarPersona(nuevaPersona);
 					this.llenarTabla();
 					this.ventanaPersona.dispose();

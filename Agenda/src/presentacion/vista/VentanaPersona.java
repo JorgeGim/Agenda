@@ -4,6 +4,7 @@ package presentacion.vista;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dto.LocalidadDTO;
+import modelo.Localidades;
 import presentacion.controlador.Controlador;
 
 public class VentanaPersona extends JFrame 
@@ -31,14 +34,16 @@ public class VentanaPersona extends JFrame
 	private JTextField txtAltura;
 	private JTextField txtPiso;
 	private JTextField txtDepto;
-	private JComboBox txtLocalidad;
+	private JComboBox comboBoxLocalidad;
 	private Label notificadorCamposObligatorios;
 	private JPanel panel;
+	private Localidades localidades;
 
-	public VentanaPersona(Controlador controlador) 
+	public VentanaPersona(Controlador controlador, Localidades localidades) 
 	{
 		super();
 		this.controlador = controlador;
+		this.localidades=localidades;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		//setBounds(200, 200, 343, 183);
@@ -133,13 +138,14 @@ public class VentanaPersona extends JFrame
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
 
-		txtLocalidad = new JComboBox();
-		txtLocalidad.setBounds(433, 131, 164, 20); // (133,y+41,164,20)
-		panel.add(txtLocalidad);
-		txtLocalidad.addItem("Trujui");
-		txtLocalidad.addItem("Malvinas Argentinas");
-		txtLocalidad.addItem("San Miguel Arcangel");
-
+		comboBoxLocalidad = new JComboBox();
+		comboBoxLocalidad.setBounds(433, 131, 164, 20); // (133,y+41,164,20)
+		panel.add(comboBoxLocalidad);
+		List<LocalidadDTO> lista = this.localidades.obtenerLocalidades();
+		
+		for(LocalidadDTO localidad :lista) {
+			comboBoxLocalidad.addItem(localidad.toString());
+		}
 		
 		txtEmail = new JTextField();
 		txtEmail.setBounds(133, 172, 164, 20); // (133,y+41,164,20)
@@ -198,7 +204,7 @@ public class VentanaPersona extends JFrame
 		this.txtFechaDeCumpleaños.setText(txtFechaDeCumpleaños);
 	}
 
-	public void setTxtTipoDeContacto(int i) {
+	public void setTxtTipoDeContacto(String i) {
 		this.txtTipoDeContacto.setSelectedItem(i);
 	}
 
@@ -214,8 +220,8 @@ public class VentanaPersona extends JFrame
 		this.txtDepto.setText(txtDepto);
 	}
 
-	public void setTxtLocalidad(int i) {
-		this.txtLocalidad.setSelectedItem(i);
+	public void setTxtLocalidad(String nombre) {
+		this.comboBoxLocalidad.setSelectedItem(nombre);
 	}
 
 	public JTextField getTxtNombre() 
@@ -262,7 +268,7 @@ public class VentanaPersona extends JFrame
 	}
 
 	public JComboBox getTxtLocalidad() {
-		return txtLocalidad;
+		return comboBoxLocalidad;
 	}
 	
 }

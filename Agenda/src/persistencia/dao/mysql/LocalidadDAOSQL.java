@@ -17,9 +17,9 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	private static final String delete = "DELETE FROM localidades WHERE idLocalidad = ?";
 	private static final String readall = "SELECT * FROM localidades";
 	private static final String editar = "UPDATE localidades SET (NombreLocalidad)\" + \"VALUES( ?) WHERE idLocalidad = ?" ;
-	private static final String obtenerPersona= "SELECT * FROM localidad l WHERE l.idLocalidad = ?";
+	private static final String obtenerLocalidad = "SELECT * FROM localidades l WHERE l.idLocalidad = ?";
+	private static final String obtenerId = "SELECT idLocalidad FROM localidades l WHERE l.NombreLocalidad = ?";
 	
-
 	public boolean insert(LocalidadDTO localidad) {
 			PreparedStatement statement;
 			Conexion conexion = Conexion.getConexion();
@@ -124,9 +124,49 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		return localidades;
 	}
 
-	public PersonaDTO obtenerPersona(LocalidadDTO localidad) {
-		// TODO Auto-generated method stub
+	@Override
+	public LocalidadDTO obtenerLocalidad(int idLocalidad) {
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Conexion conexion = Conexion.getConexion();
+		
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(obtenerLocalidad);
+			statement.setInt(1, idLocalidad);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				LocalidadDTO localidad = new LocalidadDTO(resultSet.getInt("idLocalidad"), resultSet.getString("NombreLocalidad"));
+				return localidad;	
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
+
+
+	@Override
+	public int obtenerId(String nombreLocalidad) {
+		PreparedStatement statement;
+		ResultSet resultSet;
+		Conexion conexion = Conexion.getConexion();
+		
+		try {
+			statement = conexion.getSQLConexion().prepareStatement(obtenerId);
+			statement.setString(1, nombreLocalidad);
+			resultSet = statement.executeQuery();
+			if(resultSet.next())
+				return resultSet.getInt("idLocalidad");
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+
 
 }

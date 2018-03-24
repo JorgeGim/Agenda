@@ -34,8 +34,13 @@ public class Localidades {
 		this.localidad.editar(localidadEditada);
 	}
 	
-	public PersonaDTO obtenerPersona(LocalidadDTO localidad) {
-		return this.localidad.obtenerPersona(localidad);
+	public LocalidadDTO obtenerLocalidad(int localidad) {
+		return this.localidad.obtenerLocalidad(localidad);
 	}
+
+	public int obtenerId(String nombreLocalidad) {
+		return this.localidad.obtenerId(nombreLocalidad);
+	}
+
 	
 }
