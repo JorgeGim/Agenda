@@ -10,14 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import dto.ContactoDTO;
 import dto.LocalidadDTO;
-import modelo.Contactos;
-import modelo.Localidades;
+import modelo.Contacto;
+import modelo.Localidad;
 import presentacion.controlador.Controlador;
 
 public class VentanaPersona extends JFrame 
@@ -37,13 +38,12 @@ public class VentanaPersona extends JFrame
 	private JTextField txtPiso;
 	private JTextField txtDepto;
 	private JComboBox comboBoxLocalidad;
-	private Label notificadorCamposObligatorios;
 	private JPanel panel;
-	private Localidades localidades;
-	private Contactos contactos;
+	private Localidad localidades;
+	private Contacto contactos;
 	private int idEditar;
 
-	public VentanaPersona(Controlador controlador, Localidades localidades, Contactos contactos) 
+	public VentanaPersona(Controlador controlador, Localidad localidades, Contacto contactos) 
 	{
 		super();
 		this.controlador = controlador;
@@ -193,10 +193,15 @@ public class VentanaPersona extends JFrame
 	}
 	
 	public void notificarCamposRequeridos() {
-		notificadorCamposObligatorios = new Label("ERROR: Complete NOMBRE y CALLE");
-		notificadorCamposObligatorios.setBounds(310, 295, 230, 14);
-		notificadorCamposObligatorios.setForeground(Color.RED);
-		panel.add(notificadorCamposObligatorios);
+		JOptionPane.showMessageDialog(null, "Complete NOMBRE y CALLE");
+	}
+	
+	public void notificarEmailErroneo() {
+		JOptionPane.showMessageDialog(null, "Formato de email no válido");
+	}
+	
+	public void notificarFechaDeNacimientoErronea() {
+		JOptionPane.showMessageDialog(null, "Formato de fecha no válida");
 	}
 	
 	public void setTxtNombre(String txtNombre) {

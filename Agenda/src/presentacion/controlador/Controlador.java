@@ -11,13 +11,14 @@ import dto.ContactoDTO;
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
 import modelo.Agenda;
-import modelo.Contactos;
-import modelo.Localidades;
+import modelo.Contacto;
+import modelo.Localidad;
 import presentacion.reportes.ReporteAgenda;
-import presentacion.vista.VentanaContactos;
+import presentacion.vista.VentanaContacto;
 import presentacion.vista.VentanaLocalidad;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
+import verificador.VerificadorDeDatos;
 
 public class Controlador implements ActionListener
 {
@@ -27,13 +28,13 @@ public class Controlador implements ActionListener
 		private List<ContactoDTO> contactos_en_tabla;
 		private VentanaPersona ventanaPersona; 
 		private Agenda agenda;
-		private Localidades localidades;
-		private Contactos contactos;
+		private Localidad localidades;
+		private Contacto contactos;
 		private VentanaLocalidad ventanaLocalidad;
-		private VentanaContactos ventanaContactos;
+		private VentanaContacto ventanaContactos;
 		private boolean agregando;
 		
-		public Controlador(Vista vista, Agenda agenda,Localidades localidad, Contactos contactos)
+		public Controlador(Vista vista, Agenda agenda,Localidad localidad, Contacto contactos)
 		{
 			this.vista = vista;
 			this.vista.getBtnAgregar().addActionListener(this);
@@ -55,7 +56,7 @@ public class Controlador implements ActionListener
 			this.llenarTabla();
 			this.vista.show();
 			this.ventanaLocalidad = new VentanaLocalidad(this);
-			this.ventanaContactos = new VentanaContactos(this);
+			this.ventanaContactos = new VentanaContacto(this);
 		}
 		
 		public List<PersonaDTO> getPersonas_en_tabla() {
@@ -70,7 +71,7 @@ public class Controlador implements ActionListener
 			return contactos_en_tabla;
 		}
 
-		public Contactos getContactos() {
+		public Contacto getContactos() {
 			return contactos;
 		}
 
@@ -78,7 +79,7 @@ public class Controlador implements ActionListener
 			return agenda;
 		}
 
-		public Localidades getLocalidades() {
+		public Localidad getLocalidades() {
 			return localidades;
 		}
 
@@ -196,8 +197,21 @@ public class Controlador implements ActionListener
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
 				boolean bandera = verificarNombreCalle();
+				boolean checkEmail = true;
+				boolean checkFechaDeNacimiento = true;
 				
-				if(bandera && agregando) {
+				String email = this.ventanaPersona.getTxtEmail().getText();
+				String fechaDeNacimiento = this.ventanaPersona.getTxtFechaDeCumpleaños().getText();
+				
+				if(!email.isEmpty()) {
+					checkEmail = verificarEmail();
+				}
+				
+				if(!fechaDeNacimiento.isEmpty()) {
+					checkFechaDeNacimiento = verificarFechaNacimiento();
+				}
+				
+				if(bandera && checkEmail && checkFechaDeNacimiento&& agregando) {
 					//ventanaPersona.getTxtLocalidad().getSelectedItem().toString()
 					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),this.contactos.obtenerId(ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString()) );
 					this.agenda.agregarPersona(nuevaPersona);
@@ -220,6 +234,24 @@ public class Controlador implements ActionListener
 			}
 			
 		}
+		
+		private boolean verificarEmail() {
+			if(VerificadorDeDatos.verificarEmail(this.ventanaPersona.getTxtEmail().getText())) {
+				return true;
+			}else {
+				this.ventanaPersona.notificarEmailErroneo();
+				return false;
+			}
+		}
+		
+		private boolean verificarFechaNacimiento() {
+			if(VerificadorDeDatos.verificarEmail(this.ventanaPersona.getTxtEmail().getText())) {
+				return true;
+			}else {
+				this.ventanaPersona.notificarFechaDeNacimientoErronea();
+				return false;
+			}
+		}
 
 		private boolean verificarNombreCalle() {
 			boolean bandera = true;
@@ -227,15 +259,11 @@ public class Controlador implements ActionListener
 			JTextField nombre = this.ventanaPersona.getTxtNombre();
 			JTextField calle = this.ventanaPersona.getTxtCalle();
 			
-			if(nombre.getText().isEmpty()) {
+			if(nombre.getText().isEmpty() || calle.getText().isEmpty()) {
 				this.ventanaPersona.notificarCamposRequeridos();
 				bandera = false;
 			}
 			
-			if(calle.getText().isEmpty()) {
-				this.ventanaPersona.notificarCamposRequeridos();
-				bandera = false;
-			}
 			return bandera;
 		}
 

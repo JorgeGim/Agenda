@@ -1,5 +1,6 @@
-/presentacion/
 /dto/
-/persistencia/
-/modelo/
 /main/
+/modelo/
+/persistencia/
+/presentacion/
+/verificador/
