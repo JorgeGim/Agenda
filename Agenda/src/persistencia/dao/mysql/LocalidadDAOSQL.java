@@ -22,7 +22,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	
 	public boolean insert(LocalidadDTO localidad) {
 			PreparedStatement statement;
-			Conexion conexion = Conexion.getConexion();
+			Conexion conexion = conectar();
 			try 
 			{
 				statement = conexion.getSQLConexion().prepareStatement(insert);
@@ -41,10 +41,14 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		
 	}
 
+	private Conexion conectar() {
+		return Conexion.getConexion();
+	}
+
 	public boolean delete(LocalidadDTO localidadAEliminar) {
 		PreparedStatement statement;
 		int chequeoUpdate = 0;
-		Conexion conexion = Conexion.getConexion();
+		Conexion conexion = conectar();
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(delete);
@@ -62,7 +66,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 
 	public boolean editar(LocalidadDTO localidad, int idEditar) {
 		PreparedStatement statement;
-		Conexion conexion = Conexion.getConexion();
+		Conexion conexion = conectar();
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(editar);
@@ -83,7 +87,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	private int obtenerID(String nombre) {
 		PreparedStatement statement;
 		ResultSet resultSet;
-		Conexion conexion = Conexion.getConexion();
+		Conexion conexion = conectar();
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement("SELECT idLocalidad FROM localidad l WHERE l.NombreLocalidad = ?");
@@ -106,7 +110,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
 		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
-		Conexion conexion = Conexion.getConexion();
+		Conexion conexion = conectar();
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
@@ -128,7 +132,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	public LocalidadDTO obtenerLocalidad(int idLocalidad) {
 		PreparedStatement statement;
 		ResultSet resultSet;
-		Conexion conexion = Conexion.getConexion();
+		Conexion conexion = conectar();
 		
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(obtenerLocalidad);
@@ -151,7 +155,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 	public int obtenerId(String nombreLocalidad) {
 		PreparedStatement statement;
 		ResultSet resultSet;
-		Conexion conexion = Conexion.getConexion();
+		Conexion conexion = conectar();
 		
 		try {
 			statement = conexion.getSQLConexion().prepareStatement(obtenerId);

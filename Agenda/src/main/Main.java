@@ -1,6 +1,7 @@
 package main;
 
 import modelo.Agenda;
+import modelo.Contactos;
 import modelo.Localidades;
 import persistencia.conexion.Conexion;
 import persistencia.dao.mysql.DAOSQLFactory;
@@ -16,7 +17,8 @@ public class Main
 		Vista vista = new Vista();
 		Agenda modelo = new Agenda(new DAOSQLFactory());
 		Localidades modelo_localidad = new Localidades(new DAOSQLFactory());
-		Controlador controlador = new Controlador(vista, modelo,modelo_localidad);
+		Contactos modelo_contacto = new Contactos(new DAOSQLFactory());
+		Controlador controlador = new Controlador(vista, modelo,modelo_localidad,modelo_contacto);
 		controlador.inicializar();
 	}
 }

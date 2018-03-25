@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dto.ContactoDTO;
 import dto.LocalidadDTO;
+import modelo.Contactos;
 import modelo.Localidades;
 import presentacion.controlador.Controlador;
 
@@ -38,13 +40,15 @@ public class VentanaPersona extends JFrame
 	private Label notificadorCamposObligatorios;
 	private JPanel panel;
 	private Localidades localidades;
+	private Contactos contactos;
 	private int idEditar;
 
-	public VentanaPersona(Controlador controlador, Localidades localidades) 
+	public VentanaPersona(Controlador controlador, Localidades localidades, Contactos contactos) 
 	{
 		super();
 		this.controlador = controlador;
 		this.localidades=localidades;
+		this.contactos=contactos;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		//setBounds(200, 200, 343, 183);
@@ -160,11 +164,12 @@ public class VentanaPersona extends JFrame
 		
 		txtTipoDeContacto = new JComboBox();
 		txtTipoDeContacto.setBounds(133, 254, 164, 20); // (133,y+41,164,20)
-		txtTipoDeContacto.addItem("Trabajo");
-		txtTipoDeContacto.addItem("Familia");
-		txtTipoDeContacto.addItem("Amigos");
-		txtTipoDeContacto.addItem("Otros");
 		panel.add(txtTipoDeContacto);
+		List<ContactoDTO> listaContactos= this.contactos.obtenerContactos();
+		
+		for(ContactoDTO contacto: listaContactos) {
+		 txtTipoDeContacto.addItem(contacto.getNombre());
+		}
 		
 		btnAgregarPersona = new JButton("Agregar");
 		btnAgregarPersona.addActionListener(this.controlador);

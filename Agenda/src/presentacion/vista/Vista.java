@@ -25,6 +25,7 @@ public class Vista
 	private DefaultTableModel modelPersonas;
 	private  String[] nombreColumnas = {"Nombre y apellido","Teléfono","Calle","Altura","Piso","Depto","Localidad","Email","Fecha de cumpleaños","Tipo de contacto"};
 	private JButton btnLocalidades;
+	private JButton btnContacto;
 
 	public Vista() 
 	{
@@ -93,6 +94,10 @@ public class Vista
 		btnLocalidades.setBounds(406, 228, 89, 23);
 		panel.add(btnLocalidades);
 		
+		btnContacto = new JButton("Tipo Cont");
+		btnContacto.setBounds(505,228, 89, 23);
+		panel.add(btnContacto);
+		
 	}
 	
 	public void show()
@@ -115,6 +120,11 @@ public class Vista
 		this.frame.setVisible(true);
 	}
 	
+	public JButton getBtnContacto() {
+		return btnContacto;
+	}
+
+
 	public JButton getBtnAgregar() 
 	{
 		return btnAgregar;
