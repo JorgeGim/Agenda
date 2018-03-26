@@ -25,12 +25,12 @@ public class ReporteAgenda
     public ReporteAgenda(List<PersonaDTO> personas)
     {
     	//Hardcodeado
-		Map<String, Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
+		//Map<String, Object> parametersMap = new HashMap<String, Object>();
+		//parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
     	try		{
     		
 			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes\\ReporteAgenda.jasper" );
-			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
+			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, 
 					new JRBeanCollectionDataSource(personas));
 		}
 		catch( JRException ex ) 
