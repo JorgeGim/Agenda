@@ -23,6 +23,9 @@
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[email]]></fieldDescription>
 	</field>
+	<field name="idPersona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idPersona]]></fieldDescription>
+	</field>
 	<variable name="email1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{email}]]></variableExpression>
 	</variable>
@@ -133,8 +136,7 @@
 		<band height="65">
 			<textField>
 				<reportElement x="390" y="30" width="80" height="35" uuid="8637b8a3-eeb1-44a4-b836-4e8c12d6eee6"/>
-				<textFieldExpression><![CDATA[
-"Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="470" y="30" width="91" height="35" uuid="e5998886-09a1-49f9-aa37-084aeb571547"/>
@@ -142,4 +144,28 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<lastPageFooter>
+		<band height="240">
+			<frame>
+				<reportElement x="0" y="1" width="551" height="239" uuid="5acc0d06-5a15-42af-8a5a-0a984944b999"/>
+				<pieChart>
+					<chart evaluationTime="Report">
+						<reportElement x="90" y="10" width="360" height="220" uuid="1c9e723d-cb56-4757-ab1f-3912d02286f2"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<pieDataset>
+						<keyExpression><![CDATA[$F{idPersona}]]></keyExpression>
+						<valueExpression><![CDATA[$F{añoNacimiento}]]></valueExpression>
+						<labelExpression><![CDATA[$F{añoNacimiento}.toString()]]></labelExpression>
+					</pieDataset>
+					<piePlot>
+						<plot/>
+						<itemLabel/>
+					</piePlot>
+				</pieChart>
+			</frame>
+		</band>
+	</lastPageFooter>
 </jasperReport>
