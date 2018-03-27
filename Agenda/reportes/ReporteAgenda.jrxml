@@ -53,7 +53,7 @@
 		<groupHeader>
 			<band height="66">
 				<rectangle>
-					<reportElement mode="Opaque" x="5" y="16" width="565" height="24" forecolor="#141111" backcolor="#080404" uuid="d798a3d6-3e80-42e9-9fe7-1cb45669e261"/>
+					<reportElement mode="Opaque" x="0" y="16" width="555" height="24" forecolor="#141111" backcolor="#080404" uuid="d798a3d6-3e80-42e9-9fe7-1cb45669e261"/>
 				</rectangle>
 				<textField>
 					<reportElement mode="Transparent" x="10" y="18" width="180" height="30" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="307c87b1-4dfb-46c6-8b59-92e6acd78d18"/>
@@ -169,9 +169,12 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="142" splitType="Stretch">
+		<band height="221" splitType="Stretch">
 			<frame>
-				<reportElement x="5" y="20" width="547" height="110" uuid="1576476d-78aa-4c55-a097-1e3e5e3c2336"/>
+				<reportElement x="120" y="10" width="296" height="211" uuid="40059367-f318-4f7a-9dd5-752995527b15"/>
+				<rectangle>
+					<reportElement mode="Opaque" x="82" y="166" width="178" height="14" backcolor="#663332" uuid="d43a2286-35ea-4b59-a620-236a37d75d63"/>
+				</rectangle>
 			</frame>
 		</band>
 	</columnFooter>
@@ -189,4 +192,11 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<lastPageFooter>
+		<band height="212">
+			<frame>
+				<reportElement x="0" y="10" width="555" height="202" uuid="a6d6564f-146f-436a-9e86-cb413cb5bf5b"/>
+			</frame>
+		</band>
+	</lastPageFooter>
 </jasperReport>
