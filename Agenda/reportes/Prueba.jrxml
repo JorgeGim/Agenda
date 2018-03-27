@@ -150,7 +150,7 @@
 				<reportElement x="0" y="1" width="551" height="239" uuid="5acc0d06-5a15-42af-8a5a-0a984944b999"/>
 				<pieChart>
 					<chart evaluationTime="Report">
-						<reportElement x="90" y="10" width="360" height="220" uuid="1c9e723d-cb56-4757-ab1f-3912d02286f2"/>
+						<reportElement x="90" y="10" width="360" height="220" uuid="a67931fd-2966-4db6-9a8f-468252550dcc"/>
 						<chartTitle/>
 						<chartSubtitle/>
 						<chartLegend/>
