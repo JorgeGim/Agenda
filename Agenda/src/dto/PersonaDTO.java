@@ -19,6 +19,7 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 	private int tipoContacto;
 	private SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 	private char caracter='@';
+	private int añoNacimiento;
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono)
 	{
@@ -40,8 +41,17 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 		this.email=Email;
 		this.fechaCumpleaños=fechaDeCumpleaños;
 		this.tipoContacto=tipoDeContacto;
+		this.añoNacimiento=Integer.parseInt(fechaDeCumpleaños.substring(fechaDeCumpleaños.length()-4, fechaDeCumpleaños.length()));
 	}
 	
+	public int getAñoNacimiento() {
+		return añoNacimiento;
+	}
+
+	public void setAñoNacimiento(int añoNacimiento) {
+		this.añoNacimiento = añoNacimiento;
+	}
+
 	public String getCalle() {
 		return this.calle;
 	}
@@ -155,7 +165,6 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 		//Agarra los mails y se queda con lo posterior al @
 		String extension1 = this.email.substring(this.email.indexOf(caracter)+1,this.email.length());
 		String extension2 = p.getEmail().substring(p.getEmail().indexOf(caracter)+1, p.getEmail().length());
-		
 		// retorna la extension de los mail en orden alfabetico
 		return extension1.compareTo(extension2);
 	}
