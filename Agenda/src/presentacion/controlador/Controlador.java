@@ -201,7 +201,6 @@ public class Controlador implements ActionListener
 			}
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
-				boolean bandera = verificarNombreCalle();
 				boolean checkEmail = true;
 				boolean checkFechaDeNacimiento = true;
 				
@@ -216,8 +215,9 @@ public class Controlador implements ActionListener
 					checkFechaDeNacimiento = verificarFechaNacimiento();
 				}
 				
+				boolean bandera = verificarNombreCalle() && checkEmail && checkFechaDeNacimiento;
+				
 				if(bandera && checkEmail && checkFechaDeNacimiento&& agregando) {
-					//ventanaPersona.getTxtLocalidad().getSelectedItem().toString()
 					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),this.contactos.obtenerId(ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString()) );
 					this.agenda.agregarPersona(nuevaPersona);
 					this.llenarTabla();
@@ -227,7 +227,22 @@ public class Controlador implements ActionListener
 			}
 			
 			else if(e.getSource() == this.ventanaPersona.getBtnEditarPersona()) {
-				boolean bandera= verificarNombreCalle();
+				
+				boolean checkEmail = true;
+				boolean checkFechaDeNacimiento = true;
+				
+				String email = this.ventanaPersona.getTxtEmail().getText();
+				String fechaDeNacimiento = this.ventanaPersona.getTxtFechaDeCumpleaños().getText();
+				
+				if(!email.isEmpty()) {
+					checkEmail = verificarEmail();
+				}
+				
+				if(!fechaDeNacimiento.isEmpty()) {
+					checkFechaDeNacimiento = verificarFechaNacimiento();
+				}
+				
+				boolean bandera = verificarNombreCalle() && checkEmail && checkFechaDeNacimiento;
 				
 				if(bandera && !agregando) {
 					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),this.contactos.obtenerId(ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString()));
@@ -250,7 +265,7 @@ public class Controlador implements ActionListener
 		}
 		
 		private boolean verificarFechaNacimiento() {
-			if(VerificadorDeDatos.verificarEmail(this.ventanaPersona.getTxtEmail().getText())) {
+			if(VerificadorDeDatos.verificarFecha(this.ventanaPersona.getTxtFechaDeCumpleaños().getText())) {
 				return true;
 			}else {
 				this.ventanaPersona.notificarFechaDeNacimientoErronea();
