@@ -40,7 +40,7 @@
 					</rectangle>
 					<textField>
 						<reportElement x="444" y="10" width="106" height="30" forecolor="#FFFCFC" uuid="9279479f-8524-4333-9ac3-b76f63a0f637"/>
-						<textFieldExpression><![CDATA[$F{añoNacimiento}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 					</textField>
 				</frame>
 			</band>
@@ -150,14 +150,14 @@
 				<reportElement x="0" y="1" width="551" height="239" uuid="5acc0d06-5a15-42af-8a5a-0a984944b999"/>
 				<pieChart>
 					<chart evaluationTime="Report">
-						<reportElement x="90" y="10" width="360" height="220" uuid="a67931fd-2966-4db6-9a8f-468252550dcc"/>
+						<reportElement x="90" y="10" width="360" height="220" uuid="1ecffae0-2333-47d4-907b-c15271a5ef3d"/>
 						<chartTitle/>
 						<chartSubtitle/>
 						<chartLegend/>
 					</chart>
 					<pieDataset>
-						<keyExpression><![CDATA[$F{idPersona}]]></keyExpression>
-						<valueExpression><![CDATA[$F{añoNacimiento}]]></valueExpression>
+						<keyExpression><![CDATA[$F{añoNacimiento}]]></keyExpression>
+						<valueExpression><![CDATA[$V{Group1_COUNT}]]></valueExpression>
 						<labelExpression><![CDATA[$F{añoNacimiento}.toString()]]></labelExpression>
 					</pieDataset>
 					<piePlot>

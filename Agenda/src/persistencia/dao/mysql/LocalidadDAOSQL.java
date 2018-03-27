@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+
+
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
 import persistencia.conexion.Conexion;
@@ -60,6 +64,7 @@ public class LocalidadDAOSQL implements LocalidadDAO {
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "La localidad que esta intentando borrar esta en uso");
 		}
 		return false;
 	}

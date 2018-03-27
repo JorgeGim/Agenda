@@ -149,20 +149,7 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 
 	@Override
 	public int compareTo(PersonaDTO p) {
-		//Date fecha1=null;
-		//Date fecha2=null;
 
-		
-		/*try {
-			fecha1=this.formato.parse(this.fechaCumpleaños);
-			fecha2=this.formato.parse(p.getFechaCumpleaños());
-		}
-		catch(ParseException ex) {ex.printStackTrace();}
-		// retorna por fecha de cumpleaños de menor a mayor
-		if(fecha1.after(fecha2))
-			return 1;
-		if(fecha1.before(fecha2))
-			return -1;*/
 		if(this.añoNacimiento<p.getAñoNacimiento())
 			return -1;
 		if(this.añoNacimiento>p.getAñoNacimiento())
@@ -174,12 +161,4 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 		return extension1.compareTo(extension2);
 	}
 
-	/*@Override
-	public int compareTo(PersonaDTO arg0) {
-		if()
-			return -1;
-		if()
-			return 1;
-		return 0;
-	}*/
 }

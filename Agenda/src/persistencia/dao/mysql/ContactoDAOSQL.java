@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import dto.ContactoDTO;
 import dto.LocalidadDTO;
 import persistencia.conexion.Conexion;
@@ -55,6 +57,7 @@ public class ContactoDAOSQL implements ContactoDAO {
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "El tipo de contacto que esta intentando borrar esta en uso");
 		}
 		return false;
 	}

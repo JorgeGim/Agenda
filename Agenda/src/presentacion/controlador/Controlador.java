@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JTextField;
 
 import dto.ContactoDTO;
+import dto.Entidad;
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
 import modelo.Agenda;
@@ -148,12 +149,20 @@ public class Controlador implements ActionListener
 				
 			}
 			else if(e.getSource() == this.vista.getBtnReporte())
-			{	List<PersonaDTO> lista = agenda.obtenerPersonas();
+			{	/*List<Entidad> entidades=new ArrayList<Entidad>();
+			
+				for(int i=0; i< 10;i++) {
+					entidades.add(new Entidad(i,"10/"+i+"/199"+i));
+				}
+				entidades.add(new Entidad(20,"20/10/1800"));
+				entidades.add(new Entidad(21,"20/10/1800"));
+				entidades.add(new Entidad(22,"20/10/1800"));
+				entidades.add(new Entidad(23,"20/10/1800"));
+				ReporteAgenda reporte=new ReporteAgenda(entidades);*/
+				
+				List<PersonaDTO> lista = agenda.obtenerPersonas();
 				Collections.sort(lista);			
 				ReporteAgenda reporte = new ReporteAgenda(lista);
-				for(PersonaDTO persona:lista) {
-					System.out.println(persona.getAñoNacimiento());
-				}
 				reporte.mostrar();				
 			}
 			else if(e.getSource() == this.vista.getBtnEditar())
