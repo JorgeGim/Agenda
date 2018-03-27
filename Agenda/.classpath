@@ -14,6 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="con" path="com.jaspersoft.server.JRS_CONTAINER"/>
 	<classpathentry kind="con" path="net.sf.jasperreports.JR_DEPENDENCIES_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Jorge1996/Desktop/jasperreports-6.5.1-project.zip"/>
+	<classpathentry kind="lib" path="C:/Users/tomas/Desktop/jasperreports-6.5.1-project.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

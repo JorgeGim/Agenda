@@ -39,15 +39,6 @@
 	<field name="añoNacimiento" class="java.lang.Integer">
 		<fieldDescription><![CDATA[añoNacimiento]]></fieldDescription>
 	</field>
-	<variable name="fechaCumpleaños1" class="java.lang.Integer" resetType="Group" resetGroup="GrupoFecha" calculation="Count">
-		<variableExpression><![CDATA[$F{fechaCumpleaños}]]></variableExpression>
-	</variable>
-	<variable name="fechaCumpleaños2" class="java.lang.Integer" resetType="Group" resetGroup="GrupoFecha" calculation="DistinctCount">
-		<variableExpression><![CDATA[$F{fechaCumpleaños}]]></variableExpression>
-	</variable>
-	<variable name="email1" class="java.lang.Integer" resetType="Group" resetGroup="GrupoFecha" calculation="Count">
-		<variableExpression><![CDATA[$F{email}]]></variableExpression>
-	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{fechaCumpleaños}]]></groupExpression>
 	</group>
@@ -61,8 +52,12 @@
 				<frame>
 					<reportElement x="-20" y="0" width="595" height="51" uuid="eaf37d6c-240f-4406-96c8-81d03f580d21"/>
 					<rectangle>
-						<reportElement mode="Opaque" x="-1" y="-1" width="591" height="51" backcolor="#FF0000" uuid="0ef2e35e-2e4e-4b03-ad97-c02abbb2d741"/>
+						<reportElement mode="Opaque" x="-1" y="-1" width="591" height="51" backcolor="#140707" uuid="0ef2e35e-2e4e-4b03-ad97-c02abbb2d741"/>
 					</rectangle>
+					<textField>
+						<reportElement x="0" y="0" width="100" height="30" forecolor="#FFFFFF" uuid="0ca2c76a-8050-4be5-85b2-dec937763f45"/>
+						<textFieldExpression><![CDATA[$F{añoNacimiento}]]></textFieldExpression>
+					</textField>
 				</frame>
 			</band>
 		</groupHeader>
@@ -142,38 +137,31 @@
 	</columnHeader>
 	<detail>
 		<band height="46" splitType="Stretch">
-			<textField>
-				<reportElement x="5" y="0" width="105" height="19" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="110" y="1" width="102" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
-				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="210" y="0" width="92" height="18" uuid="ae25653c-cc76-4f7e-b424-f895c32ef70a"/>
-				<textFieldExpression><![CDATA[$F{calle}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="300" y="0" width="100" height="19" uuid="1ee353bd-9236-4e1c-83e4-8e4d24e331d0"/>
-				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="402" y="2" width="100" height="17" uuid="b5dfbf88-73d0-437a-a8c3-f7a1cf4b388f"/>
-				<textFieldExpression><![CDATA[$F{fechaCumpleaños}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="221" splitType="Stretch">
 			<frame>
-				<reportElement x="120" y="10" width="296" height="211" uuid="40059367-f318-4f7a-9dd5-752995527b15"/>
-				<rectangle>
-					<reportElement mode="Opaque" x="82" y="166" width="178" height="14" backcolor="#663332" uuid="d43a2286-35ea-4b59-a620-236a37d75d63"/>
-				</rectangle>
+				<reportElement x="-10" y="7" width="571" height="31" uuid="a02b2fef-d1d8-4022-8066-c941682412f5"/>
+				<textField>
+					<reportElement x="10" y="0" width="100" height="20" uuid="0da138e5-cc87-4e8b-986b-6acd3e34297c"/>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="0" width="100" height="20" uuid="ea6c1651-dc35-4383-8fa9-ebed26f7996b"/>
+					<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="222" y="0" width="100" height="20" uuid="a6be3fee-636d-46cc-b351-5852a3f0c1f8"/>
+					<textFieldExpression><![CDATA[$F{calle}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="320" y="0" width="100" height="20" uuid="7924183e-601c-46ef-8ffd-85dbf1221ed0"/>
+					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="420" y="0" width="100" height="20" uuid="358a10b9-ce92-4554-8f75-ecaae409079e"/>
+					<textFieldExpression><![CDATA[$F{fechaCumpleaños}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
-	</columnFooter>
+	</detail>
 	<pageFooter>
 		<band height="33" splitType="Stretch">
 			<textField>
@@ -189,10 +177,6 @@
 		</band>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="212">
-			<frame>
-				<reportElement x="0" y="10" width="555" height="202" uuid="a6d6564f-146f-436a-9e86-cb413cb5bf5b"/>
-			</frame>
-		</band>
+		<band height="67"/>
 	</lastPageFooter>
 </jasperReport>

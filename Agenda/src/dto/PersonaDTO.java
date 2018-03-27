@@ -41,6 +41,7 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 		this.email=Email;
 		this.fechaCumpleaños=fechaDeCumpleaños;
 		this.tipoContacto=tipoDeContacto;
+		if(!fechaDeCumpleaños.isEmpty())
 		this.añoNacimiento=Integer.parseInt(fechaDeCumpleaños.substring(fechaDeCumpleaños.length()-4, fechaDeCumpleaños.length()));
 	}
 	
@@ -148,11 +149,11 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 
 	@Override
 	public int compareTo(PersonaDTO p) {
-		Date fecha1=null;
-		Date fecha2=null;
+		//Date fecha1=null;
+		//Date fecha2=null;
 
 		
-		try {
+		/*try {
 			fecha1=this.formato.parse(this.fechaCumpleaños);
 			fecha2=this.formato.parse(p.getFechaCumpleaños());
 		}
@@ -161,7 +162,11 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 		if(fecha1.after(fecha2))
 			return 1;
 		if(fecha1.before(fecha2))
+			return -1;*/
+		if(this.añoNacimiento<p.getAñoNacimiento())
 			return -1;
+		if(this.añoNacimiento>p.getAñoNacimiento())
+			return 1;
 		//Agarra los mails y se queda con lo posterior al @
 		String extension1 = this.email.substring(this.email.indexOf(caracter)+1,this.email.length());
 		String extension2 = p.getEmail().substring(p.getEmail().indexOf(caracter)+1, p.getEmail().length());

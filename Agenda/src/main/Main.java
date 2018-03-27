@@ -20,5 +20,10 @@ public class Main
 		Contacto modelo_contacto = new Contacto(new DAOSQLFactory());
 		Controlador controlador = new Controlador(vista, modelo,modelo_localidad,modelo_contacto);
 		controlador.inicializar();
+		
+		String fecha1="1234";
+		String fecha2="1234";
+		
+		System.out.println(fecha1.compareTo(fecha2));
 	}
 }

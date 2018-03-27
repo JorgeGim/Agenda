@@ -151,6 +151,9 @@ public class Controlador implements ActionListener
 			{	List<PersonaDTO> lista = agenda.obtenerPersonas();
 				Collections.sort(lista);			
 				ReporteAgenda reporte = new ReporteAgenda(lista);
+				for(PersonaDTO persona:lista) {
+					System.out.println(persona.getAñoNacimiento());
+				}
 				reporte.mostrar();				
 			}
 			else if(e.getSource() == this.vista.getBtnEditar())
