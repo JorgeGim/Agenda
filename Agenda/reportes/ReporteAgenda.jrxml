@@ -21,6 +21,33 @@
 	<field name="fechaCumpleaños" class="java.lang.String">
 		<fieldDescription><![CDATA[fechaCumpleaños]]></fieldDescription>
 	</field>
+	<variable name="fechaCumpleaños1" class="java.lang.Integer" resetType="Group" resetGroup="GrupoFecha" calculation="Count">
+		<variableExpression><![CDATA[$F{fechaCumpleaños}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{fechaCumpleaños}]]></groupExpression>
+	</group>
+	<group name="GrupoFecha">
+		<groupExpression><![CDATA[$F{fechaCumpleaños}]]></groupExpression>
+		<groupHeader>
+			<band height="66">
+				<rectangle>
+					<reportElement mode="Opaque" x="5" y="16" width="285" height="34" forecolor="#141111" backcolor="#080404" uuid="d798a3d6-3e80-42e9-9fe7-1cb45669e261"/>
+				</rectangle>
+				<textField>
+					<reportElement mode="Transparent" x="10" y="18" width="180" height="30" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="307c87b1-4dfb-46c6-8b59-92e6acd78d18"/>
+					<textFieldExpression><![CDATA[$F{fechaCumpleaños}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="470" y="18" width="50" height="30" uuid="990b7749-9ad5-440a-951d-37c80e763ed3"/>
+					<textFieldExpression><![CDATA[$V{fechaCumpleaños1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -93,7 +120,7 @@
 	<detail>
 		<band height="46" splitType="Stretch">
 			<textField>
-				<reportElement x="5" y="0" width="105" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
+				<reportElement x="5" y="0" width="105" height="19" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -109,7 +136,7 @@
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="1" width="100" height="30" uuid="b5dfbf88-73d0-437a-a8c3-f7a1cf4b388f"/>
+				<reportElement x="402" y="2" width="100" height="17" uuid="b5dfbf88-73d0-437a-a8c3-f7a1cf4b388f"/>
 				<textFieldExpression><![CDATA[$F{fechaCumpleaños}]]></textFieldExpression>
 			</textField>
 		</band>

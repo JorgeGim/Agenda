@@ -1,6 +1,8 @@
 package dto;
 
-public class PersonaDTO 
+import java.util.Date;
+
+public class PersonaDTO implements Comparable<PersonaDTO>
 {
 	private int idPersona;
 	private String nombre;
@@ -129,4 +131,19 @@ public class PersonaDTO
 	{
 		this.telefono = telefono;
 	}
+
+	@Override
+	public int compareTo(PersonaDTO o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/*@Override
+	public int compareTo(PersonaDTO arg0) {
+		if()
+			return -1;
+		if()
+			return 1;
+		return 0;
+	}*/
 }
