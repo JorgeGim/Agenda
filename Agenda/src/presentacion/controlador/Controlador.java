@@ -3,6 +3,7 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -147,8 +148,9 @@ public class Controlador implements ActionListener
 				
 			}
 			else if(e.getSource() == this.vista.getBtnReporte())
-			{				
-				ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
+			{	List<PersonaDTO> lista = agenda.obtenerPersonas();
+				Collections.sort(lista);			
+				ReporteAgenda reporte = new ReporteAgenda(lista);
 				reporte.mostrar();				
 			}
 			else if(e.getSource() == this.vista.getBtnEditar())

@@ -1,5 +1,7 @@
 package dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PersonaDTO implements Comparable<PersonaDTO>
@@ -15,6 +17,8 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 	private String email;
 	private String fechaCumpleaños;
 	private int tipoContacto;
+	private SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
+	private char caracter='@';
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono)
 	{
@@ -133,9 +137,27 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 	}
 
 	@Override
-	public int compareTo(PersonaDTO o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(PersonaDTO p) {
+		Date fecha1=null;
+		Date fecha2=null;
+
+		
+		try {
+			fecha1=this.formato.parse(this.fechaCumpleaños);
+			fecha2=this.formato.parse(p.getFechaCumpleaños());
+		}
+		catch(ParseException ex) {ex.printStackTrace();}
+		// retorna por fecha de cumpleaños de menor a mayor
+		if(fecha1.after(fecha2))
+			return 1;
+		if(fecha1.before(fecha2))
+			return -1;
+		//Agarra los mails y se queda con lo posterior al @
+		String extension1 = this.email.substring(this.email.indexOf(caracter)+1,this.email.length());
+		String extension2 = p.getEmail().substring(p.getEmail().indexOf(caracter)+1, p.getEmail().length());
+		
+		// retorna la extension de los mail en orden alfabetico
+		return extension1.compareTo(extension2);
 	}
 
 	/*@Override

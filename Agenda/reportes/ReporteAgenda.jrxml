@@ -56,11 +56,11 @@
 			<frame>
 				<reportElement x="0" y="0" width="550" height="40" uuid="fbf866cd-64dc-4043-b98c-ed8d9f31d19c"/>
 				<staticText>
-					<reportElement x="0" y="10" width="170" height="30" uuid="df09700e-f0a8-43aa-a9d6-1430d1a7476d"/>
+					<reportElement mode="Opaque" x="0" y="10" width="170" height="30" forecolor="#FFFFFF" backcolor="#F70B07" uuid="df09700e-f0a8-43aa-a9d6-1430d1a7476d"/>
 					<textElement>
 						<font size="18"/>
 					</textElement>
-					<text><![CDATA[Reporte de personas]]></text>
+					<text><![CDATA[Agenda]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="489" y="2" width="56" height="20" uuid="0706116d-f632-4605-96d8-35fe765b5d67"/>
