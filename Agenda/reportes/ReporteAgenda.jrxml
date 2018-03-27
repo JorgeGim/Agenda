@@ -36,6 +36,9 @@
 	<field name="fechaCumpleaños" class="java.lang.String">
 		<fieldDescription><![CDATA[fechaCumpleaños]]></fieldDescription>
 	</field>
+	<field name="añoNacimiento" class="java.lang.Integer">
+		<fieldDescription><![CDATA[añoNacimiento]]></fieldDescription>
+	</field>
 	<variable name="fechaCumpleaños1" class="java.lang.Integer" resetType="Group" resetGroup="GrupoFecha" calculation="Count">
 		<variableExpression><![CDATA[$F{fechaCumpleaños}]]></variableExpression>
 	</variable>
@@ -50,28 +53,21 @@
 	</group>
 	<group name="GrupoFecha">
 		<groupExpression><![CDATA[$F{fechaCumpleaños}]]></groupExpression>
+	</group>
+	<group name="Grupo año">
+		<groupExpression><![CDATA[$F{añoNacimiento}]]></groupExpression>
 		<groupHeader>
-			<band height="66">
-				<rectangle>
-					<reportElement mode="Opaque" x="0" y="16" width="555" height="24" forecolor="#141111" backcolor="#080404" uuid="d798a3d6-3e80-42e9-9fe7-1cb45669e261"/>
-				</rectangle>
-				<textField>
-					<reportElement mode="Transparent" x="10" y="18" width="180" height="30" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="307c87b1-4dfb-46c6-8b59-92e6acd78d18"/>
-					<textFieldExpression><![CDATA[$F{fechaCumpleaños}]]></textFieldExpression>
-				</textField>
+			<band height="51">
+				<frame>
+					<reportElement x="-20" y="0" width="595" height="51" uuid="eaf37d6c-240f-4406-96c8-81d03f580d21"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="-1" y="-1" width="591" height="51" backcolor="#FF0000" uuid="0ef2e35e-2e4e-4b03-ad97-c02abbb2d741"/>
+					</rectangle>
+				</frame>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="61">
-				<textField>
-					<reportElement x="505" y="20" width="50" height="30" uuid="2416e8c1-51aa-4fd7-a445-19e4cc683641"/>
-					<textFieldExpression><![CDATA[$V{email1}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="392" y="20" width="110" height="30" uuid="d7c3f412-24a4-49d2-aa01-0efcbc2c81a0"/>
-					<text><![CDATA[Cantidad de contactos:]]></text>
-				</staticText>
-			</band>
+			<band height="50"/>
 		</groupFooter>
 	</group>
 	<background>
