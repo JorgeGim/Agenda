@@ -2,6 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Prueba" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fd91cd28-01e6-4674-8781-682764d8c715">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="net.sf.jasperreports.chart.pie.ignore.duplicated.key" value="true"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -29,6 +30,9 @@
 	<variable name="email1" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{email}]]></variableExpression>
 	</variable>
+	<variable name="Variable_1" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{añoNacimiento}]]></variableExpression>
+	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{añoNacimiento}]]></groupExpression>
 		<groupHeader>
@@ -40,7 +44,7 @@
 					</rectangle>
 					<textField>
 						<reportElement x="444" y="10" width="106" height="30" forecolor="#FFFCFC" uuid="9279479f-8524-4333-9ac3-b76f63a0f637"/>
-						<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+						<textFieldExpression><![CDATA[$F{añoNacimiento}]]></textFieldExpression>
 					</textField>
 				</frame>
 			</band>
@@ -144,13 +148,13 @@
 			</textField>
 		</band>
 	</pageFooter>
-	<lastPageFooter>
-		<band height="240">
+	<summary>
+		<band height="180">
 			<frame>
-				<reportElement x="0" y="1" width="551" height="239" uuid="5acc0d06-5a15-42af-8a5a-0a984944b999"/>
+				<reportElement x="0" y="11" width="561" height="169" uuid="b8fe57d9-4e78-4f56-bab9-ecf37cce59b9"/>
 				<pieChart>
 					<chart evaluationTime="Report">
-						<reportElement x="90" y="10" width="360" height="220" uuid="1ecffae0-2333-47d4-907b-c15271a5ef3d"/>
+						<reportElement x="90" y="0" width="339" height="160" uuid="2af8cca9-0be8-47a2-937f-09b877aaa732"/>
 						<chartTitle/>
 						<chartSubtitle/>
 						<chartLegend/>
@@ -158,7 +162,6 @@
 					<pieDataset>
 						<keyExpression><![CDATA[$F{añoNacimiento}]]></keyExpression>
 						<valueExpression><![CDATA[$V{Group1_COUNT}]]></valueExpression>
-						<labelExpression><![CDATA[$F{añoNacimiento}.toString()]]></labelExpression>
 					</pieDataset>
 					<piePlot>
 						<plot/>
@@ -167,5 +170,5 @@
 				</pieChart>
 			</frame>
 		</band>
-	</lastPageFooter>
+	</summary>
 </jasperReport>
