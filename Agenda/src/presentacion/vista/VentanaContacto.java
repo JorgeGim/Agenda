@@ -2,7 +2,6 @@ package presentacion.vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,13 +12,22 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import dto.ContactoDTO;
-import dto.LocalidadDTO;
 import presentacion.controlador.Controlador;
+import presentacion.controlador.ControladorTipoContacto;
 
-public class VentanaContacto extends JFrame implements ActionListener {
+public class VentanaContacto extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private Controlador controlador;
+	public Controlador getControlador() {
+		return controlador;
+	}
+
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
+
+	private ControladorTipoContacto c;
 	private JFrame frame;
 	private JPanel panel;
 	private DefaultTableModel modelContactos;
@@ -31,11 +39,12 @@ public class VentanaContacto extends JFrame implements ActionListener {
 	private JButton btnAceptar;
 	private JButton btnAceptarEdicion;
 	private JTextField txtAgreg;
-	private int idEditar;
+	public int idEditar;
 	
-	public VentanaContacto(Controlador controlador){
+	public VentanaContacto(Controlador controlador, ControladorTipoContacto c){
 		super();
 		this.controlador = controlador;
+		this.c = c;
 		initialize();
 	}
 
@@ -175,11 +184,11 @@ public class VentanaContacto extends JFrame implements ActionListener {
 		txtAgreg.setVisible(false);
 			
 
-		this.getBtnAgregar().addActionListener(this);
-		this.getBtnBorrar().addActionListener(this);
-		this.getBtnEditar().addActionListener(this);
-		this.getBtnAceptar().addActionListener(this);
-		this.getBtnAceptarEdicion().addActionListener(this);
+		this.getBtnAgregar().addActionListener(c);
+		this.getBtnBorrar().addActionListener(c);
+		this.getBtnEditar().addActionListener(c);
+		this.getBtnAceptar().addActionListener(c);
+		this.getBtnAceptarEdicion().addActionListener(c);
 	}
 
 	public void show() {
@@ -197,55 +206,55 @@ public class VentanaContacto extends JFrame implements ActionListener {
 		btnAceptar.setVisible(false);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this.getBtnAgregar()) {
-			System.out.println("agregando");
-			visibleAceptar();
-		}
-		else if(e.getSource() == this.getBtnBorrar()) {
-			int[] filas = this.getTablaContactos().getSelectedRows();
-			for (int fila:filas)
-			{
-				controlador.getContactos().borrarContacto(controlador.getContactos_en_tabla().get(fila));
-			}
-			//actualiza la tabla
-			controlador.llenarTablaContacto();
-		}
-		else if(e.getSource() == this.getBtnEditar()) {
-			System.out.println("editando");
-			int[] filas = this.getTablaContactos().getSelectedRows();
-			for (int fila:filas)
-			{
-				ContactoDTO contact = controlador.getContactos().obtenerContacto(controlador.getContactos_en_tabla().get(fila).getIdContacto());
-				
-				idEditar=contact.getIdContacto();
-				this.txtAgreg.setText(contact.getNombre());
-				System.out.println(contact.getNombre());
-			}
-			//actualiza la tabla
-			controlador.llenarTablaContacto();
-			visibleAceptarEdicion();
-		}
-		else if(e.getSource() == this.getBtnAceptarEdicion()) {
-			
-			ContactoDTO contactoEditar=new ContactoDTO(0,this.getTxtAgreg().getText());
-			controlador.getContactos().editar(contactoEditar, this.getIdEditar());
-			controlador.llenarTablaContacto();
-			this.txtAgreg.setText("");
-			//this.ventanaLocalidad.dispose();
-		}
-		else if(e.getSource() == this.getBtnAceptar()) {
-			String nombreContactoAgregar = this.txtAgreg.getText();
-			if(controlador.getContactos().obtenerId(nombreContactoAgregar) == 0 && !nombreContactoAgregar.equals("")) {
-			ContactoDTO nuevoContacto = new ContactoDTO(0,nombreContactoAgregar);
-			controlador.getContactos().agregarContacto(nuevoContacto);
-			this.txtAgreg.setText("");
-			controlador.llenarTablaContacto();
-			}
-		}
-
-	}
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		if(e.getSource() == this.getBtnAgregar()) {
+//			System.out.println("agregando");
+//			visibleAceptar();
+//		}
+//		else if(e.getSource() == this.getBtnBorrar()) {
+//			int[] filas = this.getTablaContactos().getSelectedRows();
+//			for (int fila:filas)
+//			{
+//				controlador.getContactos().borrarContacto(controlador.getContactos_en_tabla().get(fila));
+//			}
+//			//actualiza la tabla
+//			controlador.llenarTablaContacto();
+//		}
+//		else if(e.getSource() == this.getBtnEditar()) {
+//			System.out.println("editando");
+//			int[] filas = this.getTablaContactos().getSelectedRows();
+//			for (int fila:filas)
+//			{
+//				ContactoDTO contact = controlador.getContactos().obtenerContacto(controlador.getContactos_en_tabla().get(fila).getIdContacto());
+//				
+//				idEditar=contact.getIdContacto();
+//				this.txtAgreg.setText(contact.getNombre());
+//				System.out.println(contact.getNombre());
+//			}
+//			//actualiza la tabla
+//			controlador.llenarTablaContacto();
+//			visibleAceptarEdicion();
+//		}
+//		else if(e.getSource() == this.getBtnAceptarEdicion()) {
+//			
+//			ContactoDTO contactoEditar=new ContactoDTO(0,this.getTxtAgreg().getText());
+//			controlador.getContactos().editar(contactoEditar, this.getIdEditar());
+//			controlador.llenarTablaContacto();
+//			this.txtAgreg.setText("");
+//			//this.ventanaLocalidad.dispose();
+//		}
+//		else if(e.getSource() == this.getBtnAceptar()) {
+//			String nombreContactoAgregar = this.txtAgreg.getText();
+//			if(controlador.getContactos().obtenerId(nombreContactoAgregar) == 0 && !nombreContactoAgregar.equals("")) {
+//			ContactoDTO nuevoContacto = new ContactoDTO(0,nombreContactoAgregar);
+//			controlador.getContactos().agregarContacto(nuevoContacto);
+//			this.txtAgreg.setText("");
+//			controlador.llenarTablaContacto();
+//			}
+//		}
+//
+//	}
 
 	public DefaultTableModel getModelPersonas() {
 		return modelContactos;
