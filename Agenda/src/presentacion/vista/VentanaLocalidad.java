@@ -1,38 +1,33 @@
 package presentacion.vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import dto.LocalidadDTO;
-import persistencia.conexion.Conexion;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-
 import presentacion.controlador.Controlador;
+import presentacion.controlador.ControladorLocalidad;
 
 public class VentanaLocalidad extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private Controlador controlador;
+	public Controlador getControlador() {
+		return controlador;
+	}
+
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
+
+	private ControladorLocalidad controladorLocalidad;
 	private JPanel contentPane;
 	private JPanel panel;
 	private JTable tablaLocalidades;
@@ -48,10 +43,11 @@ public class VentanaLocalidad extends JFrame implements ActionListener{
 	private int idEditar;
 	private JButton btnAtras;
 
-	public VentanaLocalidad(Controlador controlador) {
+	public VentanaLocalidad(Controlador controlador, ControladorLocalidad cl) {
 		
 		super();
 		this.controlador = controlador;
+		this.controladorLocalidad = cl;
 		initialize();
 	}
 	
@@ -129,12 +125,12 @@ public class VentanaLocalidad extends JFrame implements ActionListener{
 		btnAtras.setBounds(400, 328, 89, 23);
 		panel.add(btnAtras);
 		
-		this.getBtnAgregar().addActionListener(this);
-		this.getBtnBorrar().addActionListener(this);
-		this.getBtnEditar().addActionListener(this);
-		this.getBtnAceptar().addActionListener(this);
-		this.getBtnAceptarEdicion().addActionListener(this);
-		this.getBtnAtras().addActionListener(this);
+		this.getBtnAgregar().addActionListener(controladorLocalidad);
+		this.getBtnBorrar().addActionListener(controladorLocalidad);
+		this.getBtnEditar().addActionListener(controladorLocalidad);
+		this.getBtnAceptar().addActionListener(controladorLocalidad);
+		this.getBtnAceptarEdicion().addActionListener(controladorLocalidad);
+		this.getBtnAtras().addActionListener(controladorLocalidad);
 		
 	}
 	
@@ -193,6 +189,7 @@ public class VentanaLocalidad extends JFrame implements ActionListener{
 	public JButton getBtnAtras() {
 		return btnAtras;
 	}
+	
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(e.getSource() == this.getBtnAgregar()) {

@@ -206,56 +206,6 @@ public class VentanaContacto extends JFrame {
 		btnAceptar.setVisible(false);
 	}
 
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		if(e.getSource() == this.getBtnAgregar()) {
-//			System.out.println("agregando");
-//			visibleAceptar();
-//		}
-//		else if(e.getSource() == this.getBtnBorrar()) {
-//			int[] filas = this.getTablaContactos().getSelectedRows();
-//			for (int fila:filas)
-//			{
-//				controlador.getContactos().borrarContacto(controlador.getContactos_en_tabla().get(fila));
-//			}
-//			//actualiza la tabla
-//			controlador.llenarTablaContacto();
-//		}
-//		else if(e.getSource() == this.getBtnEditar()) {
-//			System.out.println("editando");
-//			int[] filas = this.getTablaContactos().getSelectedRows();
-//			for (int fila:filas)
-//			{
-//				ContactoDTO contact = controlador.getContactos().obtenerContacto(controlador.getContactos_en_tabla().get(fila).getIdContacto());
-//				
-//				idEditar=contact.getIdContacto();
-//				this.txtAgreg.setText(contact.getNombre());
-//				System.out.println(contact.getNombre());
-//			}
-//			//actualiza la tabla
-//			controlador.llenarTablaContacto();
-//			visibleAceptarEdicion();
-//		}
-//		else if(e.getSource() == this.getBtnAceptarEdicion()) {
-//			
-//			ContactoDTO contactoEditar=new ContactoDTO(0,this.getTxtAgreg().getText());
-//			controlador.getContactos().editar(contactoEditar, this.getIdEditar());
-//			controlador.llenarTablaContacto();
-//			this.txtAgreg.setText("");
-//			//this.ventanaLocalidad.dispose();
-//		}
-//		else if(e.getSource() == this.getBtnAceptar()) {
-//			String nombreContactoAgregar = this.txtAgreg.getText();
-//			if(controlador.getContactos().obtenerId(nombreContactoAgregar) == 0 && !nombreContactoAgregar.equals("")) {
-//			ContactoDTO nuevoContacto = new ContactoDTO(0,nombreContactoAgregar);
-//			controlador.getContactos().agregarContacto(nuevoContacto);
-//			this.txtAgreg.setText("");
-//			controlador.llenarTablaContacto();
-//			}
-//		}
-//
-//	}
-
 	public DefaultTableModel getModelPersonas() {
 		return modelContactos;
 	}

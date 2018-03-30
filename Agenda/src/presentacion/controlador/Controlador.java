@@ -57,10 +57,14 @@ public class Controlador implements ActionListener
 		{
 			this.llenarTabla();
 			this.vista.show();
-			this.ventanaLocalidad = new VentanaLocalidad(this);
-			ControladorTipoContacto c = new ControladorTipoContacto();
-			this.ventanaContactos = new VentanaContacto(this, c);
-			c.setV(ventanaContactos);
+			
+			ControladorTipoContacto controladorTipoContacto = new ControladorTipoContacto();
+			this.ventanaContactos = new VentanaContacto(this, controladorTipoContacto);
+			controladorTipoContacto.setV(ventanaContactos);
+			
+			ControladorLocalidad controladorLocalidad = new ControladorLocalidad();
+			this.ventanaLocalidad = new VentanaLocalidad(this, controladorLocalidad);
+			controladorLocalidad.setVentanaLocalidad(ventanaLocalidad);
 		}
 		
 		public List<PersonaDTO> getPersonas_en_tabla() {
