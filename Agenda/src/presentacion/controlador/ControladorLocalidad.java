@@ -3,6 +3,8 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import dto.LocalidadDTO;
 import presentacion.vista.VentanaLocalidad;
 
@@ -35,28 +37,39 @@ public class ControladorLocalidad implements ActionListener {
 		
 		else if(e.getSource() == ventanaLocalidad.getBtnBorrar()) {
 			int[] filas = ventanaLocalidad.getTablaLocalidades().getSelectedRows();
-			for (int fila:filas)
-			{
-				ventanaLocalidad.getControlador().getLocalidades().borrarLocalidad(ventanaLocalidad.getControlador().getLocalidades_en_tabla().get(fila));
-			}
-			//actualiza la tabla
-			ventanaLocalidad.getControlador().llenarTablaLocalidad();
+			
+			if(filas.length == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione una localidad para eliminar");
+			} else {
+				
+				for (int fila:filas)
+				{
+					ventanaLocalidad.getControlador().getLocalidades().borrarLocalidad(ventanaLocalidad.getControlador().getLocalidades_en_tabla().get(fila));
+				}
+				
+				ventanaLocalidad.getControlador().llenarTablaLocalidad();
+			}	
 		}
 		
 		else if(e.getSource() == ventanaLocalidad.getBtnEditar()) {
-			System.out.println("editando");
 			int[] filas = ventanaLocalidad.getTablaLocalidades().getSelectedRows();
-			for (int fila:filas)
-			{
-				LocalidadDTO local = ventanaLocalidad.getControlador().getLocalidades().obtenerLocalidad(ventanaLocalidad.getControlador().getLocalidades_en_tabla().get(fila).getIdLocalidad());
+			
+			if(filas.length == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione una localidad para editar");
+			}else {
 				
-				ventanaLocalidad.setIdEditar(local.getIdLocalidad());
-				ventanaLocalidad.setTxtAgreg(local.getNombre());
-				System.out.println(local.getNombre());
+				for (int fila:filas)
+				{
+					LocalidadDTO local = ventanaLocalidad.getControlador().getLocalidades().obtenerLocalidad(ventanaLocalidad.getControlador().getLocalidades_en_tabla().get(fila).getIdLocalidad());
+					
+					ventanaLocalidad.setIdEditar(local.getIdLocalidad());
+					ventanaLocalidad.setTxtAgreg(local.getNombre());
+				}
+				
+				ventanaLocalidad.getControlador().llenarTablaLocalidad();
+				ventanaLocalidad.visibleAceptarEdicion();
 			}
-			//actualiza la tabla
-			ventanaLocalidad.getControlador().llenarTablaLocalidad();
-			ventanaLocalidad.visibleAceptarEdicion();
+			
 		}
 		
 		else if(e.getSource() == ventanaLocalidad.getBtnAceptarEdicion()) {
@@ -71,16 +84,20 @@ public class ControladorLocalidad implements ActionListener {
 		else if(e.getSource() == ventanaLocalidad.getBtnAceptar()) {
 			String nombreLocalidadAgregar = ventanaLocalidad.getTxtAgreg().getText();
 			
-			if(ventanaLocalidad.getControlador().getLocalidades().obtenerId(nombreLocalidadAgregar) == 0 && !nombreLocalidadAgregar.equals("")) {
-				LocalidadDTO nuevaLocalidad = new LocalidadDTO(0,nombreLocalidadAgregar);
-				ventanaLocalidad.getControlador().getLocalidades().agregarLocalidad(nuevaLocalidad);
-				ventanaLocalidad.setTxtAgreg("");
-				ventanaLocalidad.getControlador().llenarTablaLocalidad();
+			if(nombreLocalidadAgregar.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Por favor, ingrese una localidad");
+			}else {
+				if(ventanaLocalidad.getControlador().getLocalidades().obtenerId(nombreLocalidadAgregar) == 0 && !nombreLocalidadAgregar.equals("")) {
+					LocalidadDTO nuevaLocalidad = new LocalidadDTO(0,nombreLocalidadAgregar);
+					ventanaLocalidad.getControlador().getLocalidades().agregarLocalidad(nuevaLocalidad);
+					ventanaLocalidad.setTxtAgreg("");
+					ventanaLocalidad.getControlador().llenarTablaLocalidad();
+				}
 			}
+			
 		}
 		
 		else if(e.getSource() == ventanaLocalidad.getBtnAtras()) {
-			System.out.println("atras");
 			
 		}
 		

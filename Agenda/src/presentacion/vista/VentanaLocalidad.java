@@ -1,8 +1,5 @@
 package presentacion.vista;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,11 +8,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import dto.LocalidadDTO;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.ControladorLocalidad;
 
-public class VentanaLocalidad extends JFrame implements ActionListener{
+public class VentanaLocalidad extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private Controlador controlador;
@@ -188,59 +184,5 @@ public class VentanaLocalidad extends JFrame implements ActionListener{
 
 	public JButton getBtnAtras() {
 		return btnAtras;
-	}
-	
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getSource() == this.getBtnAgregar()) {
-			System.out.println("agregando");
-			visibleAceptar();
-		}
-		else if(e.getSource() == this.getBtnBorrar()) {
-			int[] filas = this.getTablaLocalidades().getSelectedRows();
-			for (int fila:filas)
-			{
-				controlador.getLocalidades().borrarLocalidad(controlador.getLocalidades_en_tabla().get(fila));
-			}
-			//actualiza la tabla
-			controlador.llenarTablaLocalidad();
-		}
-		else if(e.getSource() == this.getBtnEditar()) {
-			System.out.println("editando");
-			int[] filas = this.getTablaLocalidades().getSelectedRows();
-			for (int fila:filas)
-			{
-				LocalidadDTO local = controlador.getLocalidades().obtenerLocalidad(controlador.getLocalidades_en_tabla().get(fila).getIdLocalidad());
-				
-				this.setIdEditar(local.getIdLocalidad());
-				this.setTxtAgreg(local.getNombre());
-				System.out.println(local.getNombre());
-			}
-			//actualiza la tabla
-			controlador.llenarTablaLocalidad();
-			visibleAceptarEdicion();
-		}
-		else if(e.getSource() == this.getBtnAceptarEdicion()) {
-			
-			LocalidadDTO localidadEditar=new LocalidadDTO(0,this.getTxtAgreg().getText());
-			controlador.getLocalidades().editar(localidadEditar, this.getIdEditar());
-			controlador.llenarTablaLocalidad();
-			this.setTxtAgreg("");
-			//this.ventanaLocalidad.dispose();
-		}
-		else if(e.getSource() == this.getBtnAceptar()) {
-			String nombreLocalidadAgregar = this.getTxtAgreg().getText();
-			if(controlador.getLocalidades().obtenerId(nombreLocalidadAgregar) == 0 && !nombreLocalidadAgregar.equals("")) {
-			LocalidadDTO nuevaLocalidad = new LocalidadDTO(0,nombreLocalidadAgregar);
-			controlador.getLocalidades().agregarLocalidad(nuevaLocalidad);
-			this.setTxtAgreg("");
-			controlador.llenarTablaLocalidad();
-			}
-		}
-		else if(e.getSource() == this.getBtnAtras()) {
-			System.out.println("atras");
-			
-		}
-		
 	}
 }
