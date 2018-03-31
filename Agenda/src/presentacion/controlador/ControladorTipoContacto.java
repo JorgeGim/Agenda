@@ -1,26 +1,19 @@
 package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import dto.ContactoDTO;
-import dto.LocalidadDTO;
 import presentacion.vista.VentanaContacto;
 
 public class ControladorTipoContacto implements ActionListener {
+	VentanaContacto ventanaContacto;
 	
-	VentanaContacto v;
-	
-	public VentanaContacto getV() {
-		return v;
-	}
-
-	public void setV(VentanaContacto v) {
-		this.v = v;
-	}
-
 	public ControladorTipoContacto(VentanaContacto v) {
-		this.v = v;
+		this.ventanaContacto = v;
 	}
 	
 	public ControladorTipoContacto() {
@@ -29,53 +22,72 @@ public class ControladorTipoContacto implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == v.getBtnAgregar()) {
-			System.out.println("agregando");
-			v.visibleAceptar();
+		if(e.getSource() == ventanaContacto.getBtnAgregar()) {
+			ventanaContacto.visibleAceptar();
 		}
-		else if(e.getSource() == v.getBtnBorrar()) {
-			int[] filas = v.getTablaContactos().getSelectedRows();
-			for (int fila:filas)
-			{
-				v.getControlador().getContactos().borrarContacto(v.getControlador().getContactos_en_tabla().get(fila));
-			}
-			//actualiza la tabla
-			v.getControlador().llenarTablaContacto();
-		}
-		else if(e.getSource() == v.getBtnEditar()) {
-			System.out.println("editando");
-			int[] filas = v.getTablaContactos().getSelectedRows();
-			for (int fila:filas)
-			{
-				ContactoDTO contact = v.getControlador().getContactos().obtenerContacto(v.getControlador().getContactos_en_tabla().get(fila).getIdContacto());
-				
-				
-				v.idEditar = contact.getIdContacto();
-				v.getTxtAgreg().setText(contact.getNombre());
-				System.out.println(contact.getNombre());
-			}
-			//actualiza la tabla
-			v.getControlador().llenarTablaContacto();
-			v.visibleAceptarEdicion();
-		}
-		else if(e.getSource() == v.getBtnAceptarEdicion()) {
+		
+		else if(e.getSource() == ventanaContacto.getBtnBorrar()) {
+			int[] filas = ventanaContacto.getTablaContactos().getSelectedRows();
 			
-			ContactoDTO contactoEditar=new ContactoDTO(0,v.getTxtAgreg().getText());
-			v.getControlador().getContactos().editar(contactoEditar, v.getIdEditar());
-			v.getControlador().llenarTablaContacto();
-			v.getTxtAgreg().setText("");
-			//this.ventanaLocalidad.dispose();
-		}
-		else if(e.getSource() == v.getBtnAceptar()) {
-			String nombreContactoAgregar = v.getTxtAgreg().getText();
-			if(v.getControlador().getContactos().obtenerId(nombreContactoAgregar) == 0 && !nombreContactoAgregar.equals("")) {
-			ContactoDTO nuevoContacto = new ContactoDTO(0,nombreContactoAgregar);
-			v.getControlador().getContactos().agregarContacto(nuevoContacto);
-			v.getTxtAgreg().setText("");
-			v.getControlador().llenarTablaContacto();
+			if(filas.length == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione un contacto para borrar");
+			} else {
+				for (int fila:filas)
+				{
+					ventanaContacto.getControlador().getContactos().borrarContacto(ventanaContacto.getControlador().getContactos_en_tabla().get(fila));
+				}
+				ventanaContacto.getControlador().llenarTablaContacto();
 			}
 		}
-
+		
+		else if(e.getSource() == ventanaContacto.getBtnEditar()) {
+			int[] filas = ventanaContacto.getTablaContactos().getSelectedRows();
+			
+			if(filas.length == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione un contacto para editar");
+			} else {
+				for (int fila:filas)
+				{
+					ContactoDTO contact = ventanaContacto.getControlador().getContactos().obtenerContacto(ventanaContacto.getControlador().getContactos_en_tabla().get(fila).getIdContacto());
+				
+					ventanaContacto.idEditar = contact.getIdContacto();
+					ventanaContacto.getTxtAgreg().setText(contact.getNombre());
+				}
+				
+				ventanaContacto.getControlador().llenarTablaContacto();
+				ventanaContacto.visibleAceptarEdicion();
+			}
+		}
+		
+		else if(e.getSource() == ventanaContacto.getBtnAceptarEdicion()) {
+			ContactoDTO contactoEditar=new ContactoDTO(0,ventanaContacto.getTxtAgreg().getText());
+			
+			ventanaContacto.getControlador().getContactos().editar(contactoEditar, ventanaContacto.getIdEditar());
+			ventanaContacto.getControlador().llenarTablaContacto();
+			ventanaContacto.getTxtAgreg().setText("");
+		}
+		
+		else if(e.getSource() == ventanaContacto.getBtnAceptar()) {
+			String nombreContactoAgregar = ventanaContacto.getTxtAgreg().getText();
+			
+			if(nombreContactoAgregar.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Por favor complete un tipo de contacto");
+			} else {
+				if(ventanaContacto.getControlador().getContactos().obtenerId(nombreContactoAgregar) == 0 && !nombreContactoAgregar.equals("")) {
+					ContactoDTO nuevoContacto = new ContactoDTO(0,nombreContactoAgregar);
+					ventanaContacto.getControlador().getContactos().agregarContacto(nuevoContacto);
+					ventanaContacto.getTxtAgreg().setText("");
+					ventanaContacto.getControlador().llenarTablaContacto();
+				}
+			}
+		}
+	}
+	
+	public VentanaContacto getV() {
+		return ventanaContacto;
 	}
 
+	public void setV(VentanaContacto v) {
+		this.ventanaContacto = v;
+	}
 }

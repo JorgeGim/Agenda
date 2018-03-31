@@ -1,15 +1,15 @@
 package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import dto.ContactoDTO;
-import dto.Entidad;
 import dto.LocalidadDTO;
 import dto.PersonaDTO;
 import modelo.Agenda;
@@ -67,30 +67,6 @@ public class Controlador implements ActionListener
 			controladorLocalidad.setVentanaLocalidad(ventanaLocalidad);
 		}
 		
-		public List<PersonaDTO> getPersonas_en_tabla() {
-			return personas_en_tabla;
-		}
-
-		public List<LocalidadDTO> getLocalidades_en_tabla() {
-			return localidades_en_tabla;
-		}
-
-		public List<ContactoDTO> getContactos_en_tabla() {
-			return contactos_en_tabla;
-		}
-
-		public Contacto getContactos() {
-			return contactos;
-		}
-
-		public Agenda getAgenda() {
-			return agenda;
-		}
-
-		public Localidad getLocalidades() {
-			return localidades;
-		}
-
 		protected void llenarTabla()
 		{
 			this.vista.getModelPersonas().setRowCount(0); //Para vaciar la tabla
@@ -113,12 +89,12 @@ public class Controlador implements ActionListener
 			this.ventanaLocalidad.getModelPersonas().setColumnIdentifiers(this.ventanaLocalidad.getNombreColumna());
 			
 			this.localidades_en_tabla= localidades.obtenerLocalidades();
+			
 			for (int i = 0; i < this.localidades_en_tabla.size(); i ++)
 			{
 				Object[] filaLocalidades = {this.localidades_en_tabla.get(i).getNombre()};
 				this.ventanaLocalidad.getModelPersonas().addRow(filaLocalidades);
 			}
-			
 		}
 		
 		public void llenarTablaContacto() {
@@ -127,6 +103,7 @@ public class Controlador implements ActionListener
 			this.ventanaContactos.getModelPersonas().setColumnIdentifiers(this.ventanaContactos.getNombreColumna());
 			
 			this.contactos_en_tabla= contactos.obtenerContactos();
+			
 			for (int i = 0; i < this.contactos_en_tabla.size(); i ++)
 			{
 				Object[] filaContacto = {this.contactos_en_tabla.get(i).getNombre()};
@@ -135,7 +112,6 @@ public class Controlador implements ActionListener
 			
 		}
 		
-		
 		public void actionPerformed(ActionEvent e) 
 		{
 			if(e.getSource() == this.vista.getBtnAgregar())
@@ -143,77 +119,70 @@ public class Controlador implements ActionListener
 				this.ventanaPersona = new VentanaPersona(this,this.localidades,this.contactos);
 				this.agregando=true;
 			}
+			
 			else if(e.getSource() == this.vista.getBtnBorrar())
 			{
 				int[] filas_seleccionadas = obtenerFila();
-				for (int fila:filas_seleccionadas)
-				{
-					this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
-				}
-				//actualiza la tabla
-				this.llenarTabla();
 				
+				if(filas_seleccionadas.length == 0 ) {
+					JOptionPane.showMessageDialog(null, "Seleccione una fila para borrar");
+				} else {
+					for (int fila:filas_seleccionadas)
+					{
+						this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
+					}
+				}
+				
+				this.llenarTabla();	
 			}
-			else if(e.getSource() == this.vista.getBtnReporte())
-			{	/*List<Entidad> entidades=new ArrayList<Entidad>();
 			
-				for(int i=0; i< 10;i++) {
-					entidades.add(new Entidad(i,"10/"+i+"/199"+i));
-				}
-				entidades.add(new Entidad(20,"20/10/1800"));
-				entidades.add(new Entidad(21,"20/10/1800"));
-				entidades.add(new Entidad(22,"20/10/1800"));
-				entidades.add(new Entidad(23,"20/10/1800"));
-				ReporteAgenda reporte=new ReporteAgenda(entidades);*/
-				
+			else if(e.getSource() == this.vista.getBtnReporte())
+			{	
 				List<PersonaDTO> lista = agenda.obtenerPersonas();
 				Collections.sort(lista);			
 				ReporteAgenda reporte = new ReporteAgenda(lista);
 				reporte.mostrar();				
 			}
+			
 			else if(e.getSource() == this.vista.getBtnEditar())
 			{
 				int[] filas_seleccionadas = obtenerFila();
-				for (int fila:filas_seleccionadas)
-				{
-					this.ventanaPersona = new VentanaPersona(this,this.localidades,this.contactos);
-					this.agregando=false;
-					PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
-					
-					this.ventanaPersona.setIdPersonaAEditar(persona.getIdPersona());
-					this.ventanaPersona.setTxtNombre(persona.getNombre().toString());
-					this.ventanaPersona.setTxtTelefono(persona.getTelefono().toString());
-					this.ventanaPersona.setTxtCalle(persona.getCalle().toString());
-					this.ventanaPersona.setTxtAltura(persona.getAltura().toString());
-					this.ventanaPersona.setTxtPiso(persona.getPiso().toString());
-					this.ventanaPersona.setTxtDepto(persona.getDepto().toString());
-					this.ventanaPersona.setTxtLocalidad(this.localidades.obtenerLocalidad(persona.getLocalidad()).getNombre());
-					this.ventanaPersona.setTxtEmail(persona.getEmail().toString());
-					this.ventanaPersona.setTxtFechaDeCumpleaños(persona.getFechaCumpleaños().toString());
-					this.ventanaPersona.setTxtTipoDeContacto(this.contactos.obtenerContacto(persona.getTipoContacto()).getNombre());
-					
-					//aca borra
-					//this.agenda.borrarPersona(this.personas_en_tabla.get(fila));
-					//ventanaPersona.setTxtNombre(txtNombre);
-					
-				}
-				//actualiza la tabla
-				this.llenarTabla();
-			
-			}
-			else if(e.getSource() == this.vista.getBtnLocalidades()) {
-				//System.out.println("algo");
 				
+				if(filas_seleccionadas.length == 0) {
+					JOptionPane.showMessageDialog(null, "Seleccione una fila para editar");
+				} else {
+					for (int fila:filas_seleccionadas)
+					{
+						this.ventanaPersona = new VentanaPersona(this,this.localidades,this.contactos);
+						this.agregando=false;
+						PersonaDTO persona = this.agenda.obtenerPersona(this.personas_en_tabla.get(fila));
+						
+						this.ventanaPersona.setIdPersonaAEditar(persona.getIdPersona());
+						this.ventanaPersona.setTxtNombre(persona.getNombre().toString());
+						this.ventanaPersona.setTxtTelefono(persona.getTelefono().toString());
+						this.ventanaPersona.setTxtCalle(persona.getCalle().toString());
+						this.ventanaPersona.setTxtAltura(persona.getAltura().toString());
+						this.ventanaPersona.setTxtPiso(persona.getPiso().toString());
+						this.ventanaPersona.setTxtDepto(persona.getDepto().toString());
+						this.ventanaPersona.setTxtLocalidad(this.localidades.obtenerLocalidad(persona.getLocalidad()).getNombre());
+						this.ventanaPersona.setTxtEmail(persona.getEmail().toString());
+						this.ventanaPersona.setTxtFechaDeCumpleaños(persona.getFechaCumpleaños().toString());
+						this.ventanaPersona.setTxtTipoDeContacto(this.contactos.obtenerContacto(persona.getTipoContacto()).getNombre());
+					}
+					this.llenarTabla();
+				}
+			}
+			
+			else if(e.getSource() == this.vista.getBtnLocalidades()) {
 				llenarTablaLocalidad();
 				this.ventanaLocalidad.show();
-
-	
 			}
-			else if(e.getSource() == this.vista.getBtnContacto()) {
-				
+			
+			else if(e.getSource() == this.vista.getBtnContacto()) {	
 				llenarTablaContacto();
 				ventanaContactos.show();
 			}
+			
 			else if(e.getSource() == this.ventanaPersona.getBtnAgregarPersona())
 			{
 				boolean checkEmail = true;
@@ -237,8 +206,7 @@ public class Controlador implements ActionListener
 					this.agenda.agregarPersona(nuevaPersona);
 					this.llenarTabla();
 					this.ventanaPersona.dispose();
-				}
-				
+				}	
 			}
 			
 			else if(e.getSource() == this.ventanaPersona.getBtnEditarPersona()) {
@@ -261,7 +229,6 @@ public class Controlador implements ActionListener
 				
 				if(bandera && !agregando) {
 					PersonaDTO nuevaPersona = new PersonaDTO(0,this.ventanaPersona.getTxtNombre().getText(), ventanaPersona.getTxtTelefono().getText(),ventanaPersona.getTxtCalle().getText(),ventanaPersona.getTxtAltura().getText(),ventanaPersona.getTxtPiso().getText(),ventanaPersona.getTxtDepto().getText(),this.localidades.obtenerId(ventanaPersona.getTxtLocalidad().getSelectedItem().toString()),ventanaPersona.getTxtEmail().getText(),ventanaPersona.getTxtFechaDeCumpleaños().getText(),this.contactos.obtenerId(ventanaPersona.getTxtTipoDeContacto().getSelectedItem().toString()));
-//					System.out.println(this.ventanaPersona.getIdEditar());
 					this.agenda.editarPersona(nuevaPersona, this.ventanaPersona.getIdEditar());
 					this.llenarTabla();
 					this.ventanaPersona.dispose();
@@ -304,6 +271,31 @@ public class Controlador implements ActionListener
 
 		private int[] obtenerFila() {
 			int[] filas_seleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+			
 			return filas_seleccionadas;
+		}
+		
+		public List<PersonaDTO> getPersonas_en_tabla() {
+			return personas_en_tabla;
+		}
+
+		public List<LocalidadDTO> getLocalidades_en_tabla() {
+			return localidades_en_tabla;
+		}
+
+		public List<ContactoDTO> getContactos_en_tabla() {
+			return contactos_en_tabla;
+		}
+
+		public Contacto getContactos() {
+			return contactos;
+		}
+
+		public Agenda getAgenda() {
+			return agenda;
+		}
+
+		public Localidad getLocalidades() {
+			return localidades;
 		}
 }
