@@ -1,6 +1,7 @@
 package presentacion.vista;
 
 import java.awt.event.WindowAdapter;
+
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
@@ -10,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
+
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
@@ -32,10 +35,10 @@ public class Vista
 		super();
 		
 		try{
-			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+			UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
 		}
 		catch(Exception e){
-			System.out.println("Error saving native LAF: " +e);
+			e.printStackTrace();;
 		}
 		
 		

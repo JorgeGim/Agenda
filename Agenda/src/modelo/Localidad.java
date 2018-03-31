@@ -2,8 +2,8 @@ package modelo;
 
 import java.util.List;
 
+
 import dto.LocalidadDTO;
-import dto.PersonaDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.LocalidadDAO;
 

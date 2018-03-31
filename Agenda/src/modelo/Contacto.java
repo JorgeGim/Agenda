@@ -1,13 +1,12 @@
 package modelo;
 
 import java.util.List;
-
 import dto.ContactoDTO;
-import dto.LocalidadDTO;
 import persistencia.dao.interfaz.ContactoDAO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 
 public class Contacto {
+	
 	private ContactoDAO contacto;
 	
 	public Contacto(DAOAbstractFactory metodo_persistencia)
@@ -41,5 +40,4 @@ public class Contacto {
 	public int obtenerId(String nombreContacto) {
 		return this.contacto.obtenerId(nombreContacto);
 	}
-
 }

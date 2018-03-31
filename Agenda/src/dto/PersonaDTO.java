@@ -1,8 +1,6 @@
 package dto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class PersonaDTO implements Comparable<PersonaDTO>
 {
@@ -17,7 +15,6 @@ public class PersonaDTO implements Comparable<PersonaDTO>
 	private String email;
 	private String fechaCumpleaños;
 	private int tipoContacto;
-	private SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 	private char caracter='@';
 	private int añoNacimiento;
 	

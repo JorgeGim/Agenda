@@ -1,7 +1,5 @@
 package modelo;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import dto.PersonaDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
@@ -39,5 +37,4 @@ public class Agenda
 	public PersonaDTO obtenerPersona(PersonaDTO persona) {
 		return this.persona.obtenerPersona(persona);
 	}
-
 }
