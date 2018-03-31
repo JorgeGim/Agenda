@@ -97,9 +97,6 @@ public class ControladorLocalidad implements ActionListener {
 			
 		}
 		
-		else if(e.getSource() == ventanaLocalidad.getBtnAtras()) {
-			
-		}
 		
 	}
 		

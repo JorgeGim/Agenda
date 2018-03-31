@@ -37,7 +37,6 @@ public class VentanaLocalidad extends JFrame {
 	private JButton btnAceptarEdicion;
 	private JTextField txtAgreg;
 	private int idEditar;
-	private JButton btnAtras;
 
 	public VentanaLocalidad(Controlador controlador, ControladorLocalidad cl) {
 		
@@ -117,16 +116,11 @@ public class VentanaLocalidad extends JFrame {
 		panel.add(txtAgreg);
 		txtAgreg.setVisible(false);
 		
-		btnAtras= new JButton("Atras");
-		btnAtras.setBounds(400, 328, 89, 23);
-		panel.add(btnAtras);
-		
 		this.getBtnAgregar().addActionListener(controladorLocalidad);
 		this.getBtnBorrar().addActionListener(controladorLocalidad);
 		this.getBtnEditar().addActionListener(controladorLocalidad);
 		this.getBtnAceptar().addActionListener(controladorLocalidad);
 		this.getBtnAceptarEdicion().addActionListener(controladorLocalidad);
-		this.getBtnAtras().addActionListener(controladorLocalidad);
 		
 	}
 	
@@ -182,7 +176,4 @@ public class VentanaLocalidad extends JFrame {
 		return idEditar;
 	}
 
-	public JButton getBtnAtras() {
-		return btnAtras;
-	}
 }
