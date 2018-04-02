@@ -1,20 +1,32 @@
 package persistencia.conexion;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import persistencia.vista.VentanaConexion;
 
 public class Conexion 
 {
 	public static Conexion instancia;
 	private Connection connection;
+	File archivo = null;
+    FileReader fr = null;
+    BufferedReader br = null;
 	
 	private Conexion()
 	{
 		try
-		{
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","pass");
+		{	
+			archivo = new File ("conexion\\conexionBase.txt");
+	        fr = new FileReader (archivo);
+	        br = new BufferedReader(fr);
+			this.connection = DriverManager.getConnection(br.readLine(),br.readLine(),br.readLine());
 			System.out.println("Conexion exitosa");
+	        
 		}
 		catch(Exception e)
 		{
@@ -25,8 +37,9 @@ public class Conexion
 	public static Conexion getConexion()   
 	{								
 		if(instancia == null)
-		{
-			instancia = new Conexion();
+		{	
+			System.out.println("Conexion");
+			//instancia = new Conexion();
 		}
 		return instancia;
 	}
