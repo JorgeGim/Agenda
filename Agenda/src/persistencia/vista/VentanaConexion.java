@@ -27,7 +27,6 @@ public class VentanaConexion extends JFrame implements ActionListener{
 	public VentanaConexion() {
 		super();
 		initialize();
-		
 	}
 
 	private void initialize() {
@@ -35,10 +34,8 @@ public class VentanaConexion extends JFrame implements ActionListener{
 		setSize(1000, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-		setVisible(true);
 		
 		panel = new JPanel();
-		//panel.setBounds(10, 11, 307, 123);
 		panel.setSize(1000, 400);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -46,7 +43,7 @@ public class VentanaConexion extends JFrame implements ActionListener{
 		
 		crearComponentes();
 		
-
+		setVisible(true);
 	}
 
 	private void crearComponentes() {
@@ -71,7 +68,6 @@ public class VentanaConexion extends JFrame implements ActionListener{
 		puerto=new JTextField("3306");
 		usuario=new JTextField("root");
 		contraseña=new JTextField("pass");
-		ip.setVisible(true);
 		
 		ip.setBounds(133, 8, 164, 20);
 		puerto.setBounds(133, 49, 164, 20);
@@ -87,9 +83,6 @@ public class VentanaConexion extends JFrame implements ActionListener{
 		btnAgregar.addActionListener(this);
 		btnAgregar.setBounds(10, 291, 89, 23);
 		panel.add(btnAgregar);
-		
-		
-		
 	}
 
 	@Override
@@ -97,7 +90,4 @@ public class VentanaConexion extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
-	
-
-	
 }
