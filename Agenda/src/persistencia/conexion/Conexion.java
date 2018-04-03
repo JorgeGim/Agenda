@@ -7,39 +7,70 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import persistencia.vista.VentanaConexion;
+import javax.swing.JOptionPane;
+
+import presentacion.vista.VentanaConexion;
 
 public class Conexion 
 {
 	public static Conexion instancia;
 	private Connection connection;
-	File archivo = null;
-    FileReader fr = null;
-    BufferedReader br = null;
+	static File archivo = null;
+	static FileReader fr = null;
+	static BufferedReader br = null;
 	
-	private Conexion()
+	private Conexion(String ipPuerto, String usuario, String contraseña)
 	{
 		try
 		{	
-			archivo = new File ("conexion\\conexionBase.txt");
-	        fr = new FileReader (archivo);
-	        br = new BufferedReader(fr);
-			this.connection = DriverManager.getConnection(br.readLine(),br.readLine(),br.readLine());
+			this.connection = DriverManager.getConnection(ipPuerto,usuario,contraseña);
+			
+			
 			System.out.println("Conexion exitosa");
 	        
 		}
 		catch(Exception e)
 		{
 			System.out.println("Conexion fallida");
+			new VentanaConexion();
+			JOptionPane.showMessageDialog(null, "No se pudo conectar con la base");
+			
 		}
 	}
 	
 	public static Conexion getConexion()   
-	{								
+	{	
 		if(instancia == null)
 		{	
-			System.out.println("Conexion");
-			//instancia = new Conexion();
+			try {
+			archivo = new File ("conexionBase.txt");
+	        fr = new FileReader (archivo);
+	        br = new BufferedReader(fr);
+	        
+	        String linea;
+			if((linea=br.readLine())== null) {
+				System.out.println(" archivo vacio");
+				return null;
+			}
+	        instancia= new Conexion(linea,br.readLine(),br.readLine());
+			}
+			catch(Exception e) {
+				System.out.println("No se pudo acceder al archivo conexion base");
+				
+			}
+			finally{
+		         // En el finally cerramos el fichero, para asegurarnos
+		         // que se cierra tanto si todo va bien como si salta 
+		         // una excepcion.
+		         try{                    
+		            if( null != fr ){   
+		               fr.close();     
+		            }                  
+		         }catch (Exception e2){ 
+		            e2.printStackTrace();
+		         }
+		      }
+			
 		}
 		return instancia;
 	}

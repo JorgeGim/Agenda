@@ -6,6 +6,7 @@ import modelo.Contacto;
 import modelo.Localidad;
 import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.controlador.Controlador;
+import presentacion.vista.VentanaConexion;
 import presentacion.vista.Vista;
 
 

@@ -1,4 +1,4 @@
-package persistencia.vista;
+package presentacion.vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import main.Main;
+import modelo.Conexiones;
 import persistencia.conexion.Conexion;
+import persistencia.dao.mysql.DAOSQLFactory;
 
 public class VentanaConexion extends JFrame implements ActionListener{
 
@@ -23,6 +26,7 @@ public class VentanaConexion extends JFrame implements ActionListener{
 	private JLabel lblPuerto;
 	private JLabel lblUsuario;
 	private JLabel lblContraseña;
+	private Conexiones conexion;
 	
 	public VentanaConexion() {
 		super();
@@ -86,8 +90,15 @@ public class VentanaConexion extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == btnAgregar) {
+			System.out.println("algo");
+			conexion=new Conexiones(new DAOSQLFactory());
+			conexion.guardarConexionBase(ip.getText(), puerto.getText(), usuario.getText(), contraseña.getText());
+			new Main();
+			this.dispose();
+			
+		}
 		
 	}
 }

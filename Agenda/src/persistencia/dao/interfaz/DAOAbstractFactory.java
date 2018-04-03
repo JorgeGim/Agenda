@@ -8,4 +8,6 @@ public interface DAOAbstractFactory
 	public LocalidadDAO createLocalidadDAO();
 
 	public ContactoDAO createContactoDAO();
+	
+	public ConexionesDAO createConexionDAO();
 }

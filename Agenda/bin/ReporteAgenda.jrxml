@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="284e0c88-a4b2-4ff8-98a2-d67b80bcffaf">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<subDataset name="Dataset1" uuid="48018bc9-b44b-449f-8c09-3aef7b29739f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="fechaCumpleaños" class="java.lang.String">
+			<fieldDescription><![CDATA[fechaCumpleaños]]></fieldDescription>
+		</field>
+		<field name="email" class="java.lang.String">
+			<fieldDescription><![CDATA[email]]></fieldDescription>
+		</field>
+		<field name="idPersona" class="java.lang.Integer">
+			<fieldDescription><![CDATA[idPersona]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="Fecha" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[telefono]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="calle" class="java.lang.String">
+		<fieldDescription><![CDATA[calle]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="fechaCumpleaños" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaCumpleaños]]></fieldDescription>
+	</field>
+	<field name="añoNacimiento" class="java.lang.Integer">
+		<fieldDescription><![CDATA[añoNacimiento]]></fieldDescription>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{fechaCumpleaños}]]></groupExpression>
+	</group>
+	<group name="GrupoFecha">
+		<groupExpression><![CDATA[$F{fechaCumpleaños}]]></groupExpression>
+	</group>
+	<group name="Grupo año">
+		<groupExpression><![CDATA[$F{añoNacimiento}]]></groupExpression>
+		<groupHeader>
+			<band height="51">
+				<frame>
+					<reportElement x="-20" y="0" width="595" height="51" uuid="eaf37d6c-240f-4406-96c8-81d03f580d21"/>
+					<rectangle>
+						<reportElement mode="Opaque" x="-1" y="-1" width="591" height="51" backcolor="#140707" uuid="0ef2e35e-2e4e-4b03-ad97-c02abbb2d741"/>
+					</rectangle>
+					<textField>
+						<reportElement x="0" y="0" width="100" height="30" forecolor="#FFFFFF" uuid="0ca2c76a-8050-4be5-85b2-dec937763f45"/>
+						<textFieldExpression><![CDATA[$F{añoNacimiento}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="40" uuid="fbf866cd-64dc-4043-b98c-ed8d9f31d19c"/>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="10" width="170" height="30" forecolor="#FFFFFF" backcolor="#F70B07" uuid="df09700e-f0a8-43aa-a9d6-1430d1a7476d"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Agenda]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="4" width="550" height="24" uuid="d078763f-d7ce-421d-8cc3-c9d81fe255f9"/>
+				<staticText>
+					<reportElement x="3" y="2" width="160" height="20" uuid="8bd693bf-e003-4042-a1f8-881763b9ba1e"/>
+					<text><![CDATA[Reporte para el ejemplo Agenda]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement x="2" y="6" width="550" height="23" uuid="23209a62-cc9d-4b81-8e93-aa9cc3a92b36"/>
+				<staticText>
+					<reportElement x="0" y="0" width="108" height="21" uuid="6f5462fa-eb72-479f-bb27-fb5ef7144791"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nombre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="108" y="0" width="100" height="20" uuid="e2252ea3-811b-43d8-ae6b-e9b261b705f9"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Teléfono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="210" y="0" width="90" height="20" uuid="3d4a9b23-447b-4362-b544-30ab60ff0b06"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Calle]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="300" y="0" width="98" height="23" uuid="71565161-3c57-4edb-be4c-8fad7dd837bd"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Email]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="400" y="0" width="100" height="23" uuid="7170f5a2-b9cb-4e87-a5c9-a070c1406f34"/>
+					<textElement textAlignment="Center">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<frame>
+				<reportElement x="-10" y="7" width="571" height="31" uuid="a02b2fef-d1d8-4022-8066-c941682412f5"/>
+				<textField>
+					<reportElement x="10" y="0" width="100" height="20" uuid="0da138e5-cc87-4e8b-986b-6acd3e34297c"/>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="120" y="0" width="100" height="20" uuid="ea6c1651-dc35-4383-8fa9-ebed26f7996b"/>
+					<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="222" y="0" width="100" height="20" uuid="a6be3fee-636d-46cc-b351-5852a3f0c1f8"/>
+					<textFieldExpression><![CDATA[$F{calle}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="320" y="0" width="100" height="20" uuid="7924183e-601c-46ef-8ffd-85dbf1221ed0"/>
+					<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="420" y="0" width="100" height="20" uuid="358a10b9-ce92-4554-8f75-ecaae409079e"/>
+					<textFieldExpression><![CDATA[$F{fechaCumpleaños}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="355" y="0" width="100" height="30" uuid="5ce007da-8e81-48b7-91fd-8e603c20d7ef"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="0" width="100" height="30" uuid="52b869cb-a151-48f6-ad3c-3147a8d111e8"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="67"/>
+	</lastPageFooter>
+</jasperReport>

@@ -3,6 +3,7 @@
  */
 package persistencia.dao.mysql;
 
+import persistencia.dao.interfaz.ConexionesDAO;
 import persistencia.dao.interfaz.ContactoDAO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.LocalidadDAO;
@@ -27,6 +28,11 @@ public class DAOSQLFactory implements DAOAbstractFactory
 	@Override
 	public ContactoDAO createContactoDAO() {
 			return new ContactoDAOSQL();
+	}
+
+	@Override
+	public ConexionesDAO createConexionDAO() {
+		return new ConexionDAOSQL();
 	}
 
 }

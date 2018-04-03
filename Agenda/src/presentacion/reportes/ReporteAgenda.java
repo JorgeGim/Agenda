@@ -30,7 +30,7 @@ public class ReporteAgenda
 		//parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
     	try		{
     		
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes\\Prueba.jasper" );
+			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "Prueba.jasper" );
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, null, 
 					new JRBeanCollectionDataSource(personas));
 		}
