@@ -33,6 +33,9 @@
 	<variable name="Variable_1" class="java.lang.Integer" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{añoNacimiento}]]></variableExpression>
 	</variable>
+	<variable name="total" class="java.lang.Integer" incrementType="Group" incrementGroup="Group1" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{idPersona}]]></variableExpression>
+	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{añoNacimiento}]]></groupExpression>
 		<groupHeader>
@@ -154,7 +157,7 @@
 				<reportElement x="0" y="11" width="561" height="169" uuid="b8fe57d9-4e78-4f56-bab9-ecf37cce59b9"/>
 				<pieChart>
 					<chart evaluationTime="Report">
-						<reportElement x="90" y="0" width="339" height="160" uuid="2af8cca9-0be8-47a2-937f-09b877aaa732"/>
+						<reportElement x="90" y="0" width="339" height="160" uuid="4c2eb31c-de5e-4c98-8837-f46c11354cc5"/>
 						<chartTitle/>
 						<chartSubtitle/>
 						<chartLegend/>
@@ -162,6 +165,7 @@
 					<pieDataset>
 						<keyExpression><![CDATA[$F{añoNacimiento}]]></keyExpression>
 						<valueExpression><![CDATA[$V{Group1_COUNT}]]></valueExpression>
+						<labelExpression><![CDATA[new java.text.DecimalFormat("0.00").format(($V{Group1_COUNT}*100)/$V{total})+"%"]]></labelExpression>
 					</pieDataset>
 					<piePlot>
 						<plot/>

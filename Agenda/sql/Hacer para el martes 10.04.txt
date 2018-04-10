@@ -1,0 +1,7 @@
+Permisos de conexionBase
+
+cambiar ñ en fechaCumpleaños 
+
+reporte porcentajes.
+
+Probar comandos mysql en la consola antes de ponerlo en nsis

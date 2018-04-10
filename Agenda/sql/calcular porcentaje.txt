@@ -1,0 +1,1 @@
+new java.text.DecimalFormat("0.00").format(($V{MASTER_TOTAL_PAGES}))+"%"
